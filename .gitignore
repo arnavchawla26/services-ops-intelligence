@@ -1,0 +1,23 @@
+# data: raw downloads and derived files never go in git
+data/raw/
+data/parquet/
+data/enterprise/
+data/postgres/
+*.zip
+
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# os / editors
+.DS_Store
+.idea/
+.vscode/
