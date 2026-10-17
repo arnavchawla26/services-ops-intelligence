@@ -1,0 +1,256 @@
+site_id,site_name,city,region,account_name,drives,expected_failures_30d,max_p,heuristic_flagged
+SITE-00432,Lighthouse Systems Boston,Boston,AMER-East,Lighthouse Systems Corp,3547,8.03,0.3184,99
+SITE-00492,Pinecrest Mutual Amsterdam,Amsterdam,EMEA,Pinecrest Mutual plc,2436,7.17,0.6906,317
+SITE-00453,Harborview Logistics Austin,Austin,AMER-East,Harborview Logistics Holdings,2398,7.01,0.3184,55
+SITE-00017,Northwind Foods Tokyo,Tokyo,APJ,Northwind Foods Holdings,2433,6.94,0.4026,226
+SITE-00656,Lakeshore Energy Phoenix,Phoenix,AMER-West,Lakeshore Energy GmbH,1219,6.42,0.5718,92
+SITE-00098,Summitpoint Health Amsterdam,Amsterdam,EMEA,Summitpoint Health plc,1195,6.09,0.2647,31
+SITE-00327,Bluestone Health Madrid,Madrid,EMEA,Bluestone Health Inc,4178,6.07,0.5654,570
+SITE-00589,Cedarbrook Retail Singapore,Singapore,APJ,Cedarbrook Retail Holdings,1156,5.97,0.5334,79
+SITE-00016,Northgate Foods Austin,Austin,AMER-East,Northgate Foods Ltd,1216,5.72,0.2366,178
+SITE-00394,Thornhill Foods Raleigh,Raleigh,AMER-East,Thornhill Foods LLC,4181,5.63,0.8557,343
+SITE-00649,Bluestone Analytics Sydney,Sydney,APJ,Bluestone Analytics GmbH,1760,5.39,0.6708,256
+SITE-00472,Fairmont Health Sydney,Sydney,APJ,Fairmont Health GmbH,2414,5.35,0.3798,780
+SITE-00116,Meridian Aerospace Madrid,Madrid,EMEA,Meridian Aerospace GmbH,2438,5.23,0.746,254
+SITE-00605,Harborview Analytics Atlanta,Atlanta,AMER-East,Harborview Analytics GmbH,1200,4.85,0.0875,18
+SITE-00676,Evergreen Energy Amsterdam,Amsterdam,EMEA,Evergreen Energy GmbH,4180,4.73,0.1573,318
+SITE-00666,Copperfield Aerospace Seattle,Seattle,AMER-West,Copperfield Aerospace GmbH,1193,4.32,0.1575,40
+SITE-00366,Stonefield Health Frankfurt,Frankfurt,EMEA,Stonefield Health Holdings,1213,4.22,0.443,113
+SITE-00636,Redwood Foods Raleigh,Raleigh,AMER-East,Redwood Foods GmbH,2367,4.16,0.3168,230
+SITE-00475,Lakeshore Systems Amsterdam,Amsterdam,EMEA,Lakeshore Systems Ltd,1181,3.96,0.1761,167
+SITE-00273,Kingsbridge Foods Atlanta,Atlanta,AMER-East,Kingsbridge Foods LLC,1754,3.73,0.3353,188
+SITE-00333,Riverbend Pharma Dublin,Dublin,EMEA,Riverbend Pharma Ltd,1760,3.48,0.9371,228
+SITE-00133,Valleyforge Foods Frankfurt,Frankfurt,EMEA,Valleyforge Foods GmbH,1216,3.47,0.409,81
+SITE-00692,Sandstone Media Frankfurt,Frankfurt,EMEA,Sandstone Media GmbH,1214,3.46,0.4273,61
+SITE-00047,Redwood Systems Dublin,Dublin,EMEA,Redwood Systems LLC,1200,3.45,0.2064,85
+SITE-00142,Crestline Media Frankfurt,Frankfurt,EMEA,Crestline Media Corp,1200,3.44,0.3261,51
+SITE-00233,Evergreen Media Boston,Boston,AMER-East,Evergreen Media LLC,540,3.4,0.1823,230
+SITE-00200,Riverbend Retail Austin,Austin,AMER-East,Riverbend Retail Ltd,1199,3.39,0.2237,17
+SITE-00175,Fairmont Mutual Denver,Denver,AMER-West,Fairmont Mutual Ltd,2439,3.35,0.3705,404
+SITE-00229,Granite Media Austin,Austin,AMER-East,Granite Media plc,1220,3.32,0.717,195
+SITE-00640,Ridgeline Media San Jose,San Jose,AMER-West,Ridgeline Media Inc,2060,3.32,0.296,248
+SITE-00037,Lighthouse Media Austin,Austin,AMER-East,Lighthouse Media Ltd,2440,3.32,0.3068,283
+SITE-00681,Whitehall Pharma Frankfurt,Frankfurt,EMEA,Whitehall Pharma Corp,1218,3.16,0.2446,158
+SITE-00361,Westgate Aerospace Raleigh,Raleigh,AMER-East,Westgate Aerospace Inc,1219,2.88,0.2047,178
+SITE-00567,Northgate Media Madrid,Madrid,EMEA,Northgate Media Ltd,2978,2.81,0.3573,262
+SITE-00383,Evergreen Logistics Phoenix,Phoenix,AMER-West,Evergreen Logistics Holdings,540,2.77,0.1811,217
+SITE-00679,Kingsbridge Systems Denver,Denver,AMER-West,Kingsbridge Systems Inc,1219,2.76,0.3622,96
+SITE-00190,Granite Aerospace San Jose,San Jose,AMER-West,Granite Aerospace Inc,2439,2.74,0.1417,254
+SITE-00444,Thornhill Media Austin,Austin,AMER-East,Thornhill Media Corp,1220,2.72,0.684,172
+SITE-00539,Whitehall Analytics Phoenix,Phoenix,AMER-West,Whitehall Analytics Ltd,1220,2.68,0.5201,218
+SITE-00035,Meridian Logistics Seattle,Seattle,AMER-West,Meridian Logistics Holdings,2300,2.64,0.2737,99
+SITE-00593,Riverbend Systems Denver,Denver,AMER-West,Riverbend Systems Corp,1220,2.58,0.6026,292
+SITE-00112,Oakridge Logistics San Jose,San Jose,AMER-West,Oakridge Logistics Inc,2419,2.58,0.1786,247
+SITE-00667,Copperfield Aerospace Phoenix,Phoenix,AMER-West,Copperfield Aerospace GmbH,1216,2.53,0.3447,229
+SITE-00402,Redwood Energy Phoenix,Phoenix,AMER-West,Redwood Energy Inc,1219,2.37,0.4258,264
+SITE-00347,Clearview Pharma Amsterdam,Amsterdam,EMEA,Clearview Pharma Ltd,1218,2.34,0.1445,146
+SITE-00412,Cedarbrook Mutual Denver,Denver,AMER-West,Cedarbrook Mutual plc,2438,2.33,0.1611,472
+SITE-00395,Thornhill Foods Raleigh,Raleigh,AMER-East,Thornhill Foods LLC,1220,2.31,0.3234,69
+SITE-00390,Westgate Foods Bogota,Bogota,LATAM,Westgate Foods LLC,1220,2.29,0.1013,170
+SITE-00307,Eastfield Media Bogota,Bogota,LATAM,Eastfield Media Inc,1198,2.27,0.3184,20
+SITE-00611,Oakridge Capital Dublin,Dublin,EMEA,Oakridge Capital Ltd,2415,2.26,0.6924,279
+SITE-00553,Fairmont Capital Frankfurt,Frankfurt,EMEA,Fairmont Capital Ltd,1220,2.26,0.3706,73
+SITE-00279,Maplewood Retail Madrid,Madrid,EMEA,Maplewood Retail GmbH,1220,2.19,0.4509,51
+SITE-00697,Highland Capital Bogota,Bogota,LATAM,Highland Capital Ltd,1220,2.14,0.0989,244
+SITE-00495,Stonefield Logistics Phoenix,Phoenix,AMER-West,Stonefield Logistics LLC,1220,2.09,0.4595,193
+SITE-00624,Eastfield Foods Denver,Denver,AMER-West,Eastfield Foods LLC,1200,2.08,0.2477,6
+SITE-00503,Dunmore Systems Austin,Austin,AMER-East,Dunmore Systems Holdings,1220,2.07,0.2004,153
+SITE-00426,Greystone Pharma Austin,Austin,AMER-East,Greystone Pharma Inc,1219,2.07,0.1157,187
+SITE-00445,Thornhill Media Bogota,Bogota,LATAM,Thornhill Media Corp,540,2.05,0.0781,122
+SITE-00064,Oakridge Pharma Atlanta,Atlanta,AMER-East,Oakridge Pharma Ltd,1220,2.03,0.4202,36
+SITE-00521,Copperfield Energy Raleigh,Raleigh,AMER-East,Copperfield Energy Holdings,1219,2.01,0.3536,109
+SITE-00254,Clearview Logistics Austin,Austin,AMER-East,Clearview Logistics Inc,1199,2.0,0.4118,12
+SITE-00008,Northwind Capital Boston,Boston,AMER-East,Northwind Capital LLC,1216,1.98,0.2789,262
+SITE-00044,Westgate Pharma Atlanta,Atlanta,AMER-East,Westgate Pharma GmbH,1220,1.96,0.3342,59
+SITE-00641,Ridgeline Media Seattle,Seattle,AMER-West,Ridgeline Media Inc,2378,1.95,0.3954,170
+SITE-00440,Fairmont Media Frankfurt,Frankfurt,EMEA,Fairmont Media Holdings,2420,1.94,0.4362,234
+SITE-00341,Stonefield Systems Amsterdam,Amsterdam,EMEA,Stonefield Systems Ltd,2371,1.92,0.2004,598
+SITE-00442,Thornhill Media Seattle,Seattle,AMER-West,Thornhill Media Corp,2420,1.85,0.074,195
+SITE-00256,Clearview Logistics Boston,Boston,AMER-East,Clearview Logistics Inc,2441,1.84,0.172,67
+SITE-00150,Silverline Analytics Denver,Denver,AMER-West,Silverline Analytics Ltd,1934,1.83,0.3371,443
+SITE-00446,Crestline Analytics Seattle,Seattle,AMER-West,Crestline Analytics Inc,1191,1.83,0.3184,29
+SITE-00520,Copperfield Systems Seattle,Seattle,AMER-West,Copperfield Systems GmbH,1200,1.81,0.1199,5
+SITE-00171,Stonefield Capital Sydney,Sydney,APJ,Stonefield Capital plc,1219,1.81,0.5069,438
+SITE-00277,Valleyforge Aerospace Amsterdam,Amsterdam,EMEA,Valleyforge Aerospace Ltd,2420,1.8,0.0948,234
+SITE-00663,Beacon Mutual Raleigh,Raleigh,AMER-East,Beacon Mutual Corp,1220,1.8,0.5145,146
+SITE-00414,Cedarbrook Mutual Austin,Austin,AMER-East,Cedarbrook Mutual plc,1200,1.8,0.4004,145
+SITE-00691,Harborview Energy Dublin,Dublin,EMEA,Harborview Energy Inc,2440,1.8,0.6023,226
+SITE-00196,Riverbend Retail Atlanta,Atlanta,AMER-East,Riverbend Retail Ltd,1219,1.79,0.2586,202
+SITE-00639,Ridgeline Media San Jose,San Jose,AMER-West,Ridgeline Media Inc,2439,1.77,0.2498,464
+SITE-00194,Thornhill Retail Atlanta,Atlanta,AMER-East,Thornhill Retail Ltd,3640,1.76,0.1528,216
+SITE-00031,Silverline Capital Raleigh,Raleigh,AMER-East,Silverline Capital plc,1199,1.75,0.7703,2
+SITE-00245,Lighthouse Retail Austin,Austin,AMER-East,Lighthouse Retail Corp,1200,1.75,0.152,10
+SITE-00286,Beacon Pharma Atlanta,Atlanta,AMER-East,Beacon Pharma plc,1219,1.7,0.2035,63
+SITE-00454,Harborview Logistics San Jose,San Jose,AMER-West,Harborview Logistics Holdings,1220,1.7,0.1807,153
+SITE-00021,Northwind Foods Bangalore,Bangalore,APJ,Northwind Foods Holdings,1217,1.67,0.1334,499
+SITE-00556,Highland Foods Atlanta,Atlanta,AMER-East,Highland Foods Inc,1202,1.65,0.1809,112
+SITE-00185,Brightwater Analytics Phoenix,Phoenix,AMER-West,Brightwater Analytics Inc,1220,1.64,0.3254,141
+SITE-00489,Foxglove Mutual Amsterdam,Amsterdam,EMEA,Foxglove Mutual Holdings,2359,1.63,0.1326,205
+SITE-00480,Beacon Analytics Denver,Denver,AMER-West,Beacon Analytics Inc,1220,1.63,0.2157,271
+SITE-00552,Granite Foods Raleigh,Raleigh,AMER-East,Granite Foods GmbH,1220,1.62,0.3666,212
+SITE-00222,Dunmore Foods Boston,Boston,AMER-East,Dunmore Foods Holdings,2420,1.6,0.2283,332
+SITE-00223,Dunmore Foods Austin,Austin,AMER-East,Dunmore Foods Holdings,2399,1.6,0.3496,19
+SITE-00221,Foxglove Energy Bangalore,Bangalore,APJ,Foxglove Energy Corp,1220,1.6,0.0627,166
+SITE-00179,Lighthouse Foods Phoenix,Phoenix,AMER-West,Lighthouse Foods plc,2440,1.59,0.3469,168
+SITE-00158,Redwood Aerospace San Jose,San Jose,AMER-West,Redwood Aerospace LLC,2419,1.57,0.1218,194
+SITE-00634,Brightwater Capital Atlanta,Atlanta,AMER-East,Brightwater Capital LLC,1219,1.56,0.1242,162
+SITE-00310,Foxglove Analytics Bogota,Bogota,LATAM,Foxglove Analytics GmbH,1218,1.54,0.4537,335
+SITE-00189,Granite Aerospace Denver,Denver,AMER-West,Granite Aerospace Inc,1220,1.54,0.1435,36
+SITE-00500,Lighthouse Energy Sydney,Sydney,APJ,Lighthouse Energy LLC,1220,1.53,0.1632,49
+SITE-00020,Northwind Foods Sydney,Sydney,APJ,Northwind Foods Holdings,540,1.53,0.0405,43
+SITE-00367,Stonefield Health Boston,Boston,AMER-East,Stonefield Health Holdings,1220,1.53,0.4561,207
+SITE-00587,Cedarbrook Retail Tokyo,Tokyo,APJ,Cedarbrook Retail Holdings,1220,1.53,0.2599,517
+SITE-00023,Valleyforge Media Madrid,Madrid,EMEA,Valleyforge Media Holdings,1219,1.52,0.2412,116
+SITE-00258,Westgate Media San Jose,San Jose,AMER-West,Westgate Media Holdings,1220,1.51,0.3765,128
+SITE-00164,Ashford Foods Frankfurt,Frankfurt,EMEA,Ashford Foods Holdings,1220,1.47,0.6657,115
+SITE-00351,Goldcrest Media Atlanta,Atlanta,AMER-East,Goldcrest Media GmbH,1165,1.47,0.2913,479
+SITE-00630,Eastfield Aerospace Phoenix,Phoenix,AMER-West,Eastfield Aerospace Ltd,1200,1.42,0.1541,101
+SITE-00434,Lighthouse Systems Raleigh,Raleigh,AMER-East,Lighthouse Systems Corp,2420,1.41,0.0897,144
+SITE-00559,Crestline Energy Sydney,Sydney,APJ,Crestline Energy Inc,1220,1.37,0.3572,67
+SITE-00135,Valleyforge Foods Madrid,Madrid,EMEA,Valleyforge Foods GmbH,540,1.37,0.1118,82
+SITE-00324,Foxglove Health Atlanta,Atlanta,AMER-East,Foxglove Health GmbH,1220,1.37,0.1208,41
+SITE-00457,Crestline Foods San Jose,San Jose,AMER-West,Crestline Foods LLC,1220,1.36,0.0432,154
+SITE-00314,Ashford Logistics Boston,Boston,AMER-East,Ashford Logistics plc,1220,1.35,0.1598,223
+SITE-00600,Hollowbrook Energy Raleigh,Raleigh,AMER-East,Hollowbrook Energy Corp,1217,1.35,0.2037,418
+SITE-00131,Valleyforge Foods Madrid,Madrid,EMEA,Valleyforge Foods GmbH,1200,1.33,0.1431,28
+SITE-00137,Foxglove Media Boston,Boston,AMER-East,Foxglove Media Corp,1220,1.33,0.0712,69
+SITE-00413,Cedarbrook Mutual San Jose,San Jose,AMER-West,Cedarbrook Mutual plc,541,1.33,0.3511,63
+SITE-00128,Highland Logistics Frankfurt,Frankfurt,EMEA,Highland Logistics plc,1220,1.32,0.3606,55
+SITE-00474,Lakeshore Systems Madrid,Madrid,EMEA,Lakeshore Systems Ltd,1200,1.31,0.1157,227
+SITE-00646,Hollowbrook Foods San Jose,San Jose,AMER-West,Hollowbrook Foods Inc,1201,1.29,0.1683,449
+SITE-00479,Beacon Analytics Denver,Denver,AMER-West,Beacon Analytics Inc,1200,1.26,0.0177,10
+SITE-00530,Brightwater Media San Jose,San Jose,AMER-West,Brightwater Media Holdings,1220,1.25,0.1708,52
+SITE-00546,Kingsbridge Retail Phoenix,Phoenix,AMER-West,Kingsbridge Retail LLC,1219,1.22,0.2653,108
+SITE-00319,Maplewood Analytics San Jose,San Jose,AMER-West,Maplewood Analytics plc,1019,1.21,0.1247,174
+SITE-00002,Westgate Retail Bangalore,Bangalore,APJ,Westgate Retail Holdings,1220,1.19,0.0433,79
+SITE-00169,Stonefield Capital Singapore,Singapore,APJ,Stonefield Capital plc,1220,1.19,0.1928,52
+SITE-00124,Maplewood Systems Denver,Denver,AMER-West,Maplewood Systems Corp,1219,1.18,0.0937,42
+SITE-00109,Northgate Capital Singapore,Singapore,APJ,Northgate Capital GmbH,513,1.17,0.1295,58
+SITE-00685,Cedarbrook Health Phoenix,Phoenix,AMER-West,Cedarbrook Health GmbH,1200,1.16,0.2436,16
+SITE-00607,Harborview Analytics Boston,Boston,AMER-East,Harborview Analytics GmbH,1219,1.15,0.1383,369
+SITE-00473,Fairmont Health Dublin,Dublin,EMEA,Fairmont Health GmbH,1200,1.15,0.3427,82
+SITE-00433,Lighthouse Systems Tokyo,Tokyo,APJ,Lighthouse Systems Corp,1220,1.14,0.0335,145
+SITE-00377,Northwind Aerospace Bangalore,Bangalore,APJ,Northwind Aerospace GmbH,1220,1.12,0.0821,23
+SITE-00680,Kingsbridge Systems Austin,Austin,AMER-East,Kingsbridge Systems Inc,1220,1.09,0.1357,34
+SITE-00588,Cedarbrook Retail Austin,Austin,AMER-East,Cedarbrook Retail Holdings,540,1.09,0.1179,46
+SITE-00352,Goldcrest Media Madrid,Madrid,EMEA,Goldcrest Media GmbH,1218,1.08,0.2083,408
+SITE-00177,Fairmont Mutual Tokyo,Tokyo,APJ,Fairmont Mutual Ltd,1220,1.08,0.0728,35
+SITE-00537,Stonefield Energy Austin,Austin,AMER-East,Stonefield Energy Holdings,1200,1.08,0.0821,182
+SITE-00595,Kingsbridge Energy Raleigh,Raleigh,AMER-East,Kingsbridge Energy Corp,2420,1.07,0.1886,169
+SITE-00452,Harborview Logistics Denver,Denver,AMER-West,Harborview Logistics Holdings,1200,1.04,0.0373,194
+SITE-00334,Riverbend Pharma Frankfurt,Frankfurt,EMEA,Riverbend Pharma Ltd,1216,1.02,0.2014,462
+SITE-00597,Hollowbrook Energy Boston,Boston,AMER-East,Hollowbrook Energy Corp,1210,1.0,0.5706,121
+SITE-00502,Dunmore Systems Raleigh,Raleigh,AMER-East,Dunmore Systems Holdings,540,0.98,0.0979,42
+SITE-00466,Pinecrest Media Seattle,Seattle,AMER-West,Pinecrest Media GmbH,1020,0.93,0.2343,5
+SITE-00095,Summitpoint Energy Raleigh,Raleigh,AMER-East,Summitpoint Energy Ltd,1191,0.92,0.18,116
+SITE-00204,Lighthouse Capital Raleigh,Raleigh,AMER-East,Lighthouse Capital LLC,1159,0.92,0.1104,46
+SITE-00657,Lakeshore Energy San Jose,San Jose,AMER-West,Lakeshore Energy GmbH,1172,0.91,0.1266,111
+SITE-00576,Whitehall Capital Boston,Boston,AMER-East,Whitehall Capital Ltd,1200,0.9,0.4319,3
+SITE-00410,Lakeshore Mutual Raleigh,Raleigh,AMER-East,Lakeshore Mutual Holdings,1200,0.9,0.0965,39
+SITE-00249,Brightwater Foods Atlanta,Atlanta,AMER-East,Brightwater Foods LLC,1200,0.88,0.6653,1
+SITE-00134,Valleyforge Foods Atlanta,Atlanta,AMER-East,Valleyforge Foods GmbH,1200,0.88,0.1097,5
+SITE-00470,Fairmont Health Madrid,Madrid,EMEA,Fairmont Health GmbH,1220,0.87,0.0631,120
+SITE-00678,Northwind Media Denver,Denver,AMER-West,Northwind Media Holdings,1200,0.87,0.4169,14
+SITE-00571,Greystone Media Denver,Denver,AMER-West,Greystone Media GmbH,1220,0.87,0.2483,268
+SITE-00305,Silverline Pharma Boston,Boston,AMER-East,Silverline Pharma plc,1218,0.84,0.1258,500
+SITE-00125,Silverline Foods Atlanta,Atlanta,AMER-East,Silverline Foods Inc,2420,0.83,0.0295,41
+SITE-00182,Harborview Systems Mexico City,Mexico City,LATAM,Harborview Systems Holdings,1220,0.82,0.6376,21
+SITE-00122,Maplewood Systems San Jose,San Jose,AMER-West,Maplewood Systems Corp,1216,0.82,0.1186,323
+SITE-00429,Cedarbrook Capital Dublin,Dublin,EMEA,Cedarbrook Capital GmbH,1200,0.81,0.1075,162
+SITE-00355,Hollowbrook Systems Frankfurt,Frankfurt,EMEA,Hollowbrook Systems GmbH,2377,0.81,0.0504,418
+SITE-00598,Hollowbrook Energy Amsterdam,Amsterdam,EMEA,Hollowbrook Energy Corp,540,0.8,0.1691,38
+SITE-00572,Greystone Media Phoenix,Phoenix,AMER-West,Greystone Media GmbH,2440,0.79,0.2128,86
+SITE-00364,Meridian Mutual Singapore,Singapore,APJ,Meridian Mutual GmbH,1200,0.78,0.5329,8
+SITE-00643,Hollowbrook Foods Madrid,Madrid,EMEA,Hollowbrook Foods Inc,1200,0.77,0.6074,6
+SITE-00022,Valleyforge Media Frankfurt,Frankfurt,EMEA,Valleyforge Media Holdings,1200,0.77,0.1169,10
+SITE-00118,Meridian Aerospace Dublin,Dublin,EMEA,Meridian Aerospace GmbH,1220,0.76,0.0555,57
+SITE-00687,Cedarbrook Health Phoenix,Phoenix,AMER-West,Cedarbrook Health GmbH,2398,0.76,0.0898,9
+SITE-00686,Cedarbrook Health Denver,Denver,AMER-West,Cedarbrook Health GmbH,1220,0.74,0.027,69
+SITE-00458,Riverbend Capital Raleigh,Raleigh,AMER-East,Riverbend Capital Inc,1200,0.73,0.3041,5
+SITE-00281,Maplewood Retail San Jose,San Jose,AMER-West,Maplewood Retail GmbH,1219,0.72,0.1202,158
+SITE-00293,Copperfield Pharma Phoenix,Phoenix,AMER-West,Copperfield Pharma Corp,1200,0.71,0.1518,92
+SITE-00690,Harborview Energy Madrid,Madrid,EMEA,Harborview Energy Inc,1740,0.69,0.0764,37
+SITE-00406,Silverline Health Austin,Austin,AMER-East,Silverline Health Holdings,2400,0.67,0.2337,8
+SITE-00476,Lakeshore Systems Dublin,Dublin,EMEA,Lakeshore Systems Ltd,1200,0.66,0.0144,58
+SITE-00550,Evergreen Analytics Amsterdam,Amsterdam,EMEA,Evergreen Analytics LLC,1220,0.65,0.0559,72
+SITE-00100,Stonefield Pharma Denver,Denver,AMER-West,Stonefield Pharma GmbH,1200,0.64,0.0205,8
+SITE-00085,Kingsbridge Capital Austin,Austin,AMER-East,Kingsbridge Capital Ltd,1220,0.64,0.1414,150
+SITE-00483,Northgate Analytics Seattle,Seattle,AMER-West,Northgate Analytics Inc,1200,0.63,0.0069,127
+SITE-00146,Eastfield Mutual Boston,Boston,AMER-East,Eastfield Mutual LLC,1220,0.63,0.1178,39
+SITE-00482,Valleyforge Capital Amsterdam,Amsterdam,EMEA,Valleyforge Capital Ltd,1200,0.63,0.1949,14
+SITE-00211,Hollowbrook Analytics Dublin,Dublin,EMEA,Hollowbrook Analytics Ltd,1220,0.63,0.3029,59
+SITE-00237,Copperfield Foods Atlanta,Atlanta,AMER-East,Copperfield Foods Inc,1157,0.63,0.2439,9
+SITE-00271,Kingsbridge Foods Raleigh,Raleigh,AMER-East,Kingsbridge Foods LLC,540,0.62,0.0398,35
+SITE-00209,Hollowbrook Analytics Madrid,Madrid,EMEA,Hollowbrook Analytics Ltd,1200,0.6,0.0251,48
+SITE-00129,Highland Logistics Frankfurt,Frankfurt,EMEA,Highland Logistics plc,1159,0.59,0.0509,50
+SITE-00126,Highland Logistics Amsterdam,Amsterdam,EMEA,Highland Logistics plc,540,0.58,0.0178,49
+SITE-00560,Crestline Energy Atlanta,Atlanta,AMER-East,Crestline Energy Inc,1200,0.58,0.0424,105
+SITE-00034,Meridian Logistics Raleigh,Raleigh,AMER-East,Meridian Logistics Holdings,1200,0.58,0.0231,26
+SITE-00511,Granite Logistics Singapore,Singapore,APJ,Granite Logistics Inc,1200,0.57,0.0394,39
+SITE-00447,Crestline Analytics Denver,Denver,AMER-West,Crestline Analytics Inc,1200,0.54,0.0227,97
+SITE-00647,Bluestone Analytics Seattle,Seattle,AMER-West,Bluestone Analytics GmbH,1199,0.52,0.0219,11
+SITE-00070,Pinecrest Health Amsterdam,Amsterdam,EMEA,Pinecrest Health Holdings,1200,0.51,0.3184,20
+SITE-00102,Stonefield Pharma San Jose,San Jose,AMER-West,Stonefield Pharma GmbH,1200,0.51,0.0741,122
+SITE-00083,Kingsbridge Capital San Jose,San Jose,AMER-West,Kingsbridge Capital Ltd,1220,0.51,0.0946,108
+SITE-00013,Northgate Foods Boston,Boston,AMER-East,Northgate Foods Ltd,1200,0.51,0.1022,6
+SITE-00096,Thornhill Aerospace Boston,Boston,AMER-East,Thornhill Aerospace Corp,1216,0.5,0.165,287
+SITE-00517,Copperfield Systems Denver,Denver,AMER-West,Copperfield Systems GmbH,1219,0.5,0.0667,170
+SITE-00282,Oakridge Analytics Austin,Austin,AMER-East,Oakridge Analytics Corp,1220,0.49,0.0327,34
+SITE-00477,Beacon Analytics Phoenix,Phoenix,AMER-West,Beacon Analytics Inc,1200,0.49,0.1944,9
+SITE-00108,Northgate Capital Singapore,Singapore,APJ,Northgate Capital GmbH,1200,0.49,0.0377,18
+SITE-00430,Cedarbrook Capital Amsterdam,Amsterdam,EMEA,Cedarbrook Capital GmbH,1220,0.48,0.066,24
+SITE-00260,Riverbend Mutual Frankfurt,Frankfurt,EMEA,Riverbend Mutual plc,1220,0.47,0.0101,24
+SITE-00298,Copperfield Media San Jose,San Jose,AMER-West,Copperfield Media Ltd,1200,0.47,0.018,35
+SITE-00541,Whitehall Analytics Mexico City,Mexico City,LATAM,Whitehall Analytics Ltd,1220,0.47,0.0189,22
+SITE-00275,Valleyforge Aerospace Frankfurt,Frankfurt,EMEA,Valleyforge Aerospace Ltd,1219,0.47,0.0187,41
+SITE-00438,Clearview Mutual San Jose,San Jose,AMER-West,Clearview Mutual GmbH,1201,0.46,0.0342,13
+SITE-00231,Eastfield Analytics Austin,Austin,AMER-East,Eastfield Analytics Ltd,1200,0.46,0.0257,77
+SITE-00019,Northwind Foods Santiago,Santiago,LATAM,Northwind Foods Holdings,1200,0.45,0.0268,36
+SITE-00682,Harborview Retail San Jose,San Jose,AMER-West,Harborview Retail LLC,1220,0.45,0.1158,41
+SITE-00627,Clearview Media Frankfurt,Frankfurt,EMEA,Clearview Media LLC,1220,0.45,0.0247,28
+SITE-00516,Copperfield Systems Phoenix,Phoenix,AMER-West,Copperfield Systems GmbH,1200,0.44,0.0203,29
+SITE-00664,Riverbend Media Madrid,Madrid,EMEA,Riverbend Media LLC,1200,0.44,0.1881,5
+SITE-00591,Northwind Pharma Frankfurt,Frankfurt,EMEA,Northwind Pharma LLC,2420,0.41,0.0204,22
+SITE-00300,Copperfield Media Phoenix,Phoenix,AMER-West,Copperfield Media Ltd,1199,0.41,0.0112,37
+SITE-00578,Dunmore Mutual Raleigh,Raleigh,AMER-East,Dunmore Mutual plc,1200,0.41,0.0478,20
+SITE-00610,Oakridge Capital Frankfurt,Frankfurt,EMEA,Oakridge Capital Ltd,1200,0.39,0.0276,18
+SITE-00566,Northgate Media Amsterdam,Amsterdam,EMEA,Northgate Media Ltd,1200,0.38,0.0148,26
+SITE-00143,Crestline Media Madrid,Madrid,EMEA,Crestline Media Corp,1200,0.37,0.0055,95
+SITE-00609,Oakridge Capital Amsterdam,Amsterdam,EMEA,Oakridge Capital Ltd,1220,0.36,0.0877,28
+SITE-00462,Hollowbrook Retail Dublin,Dublin,EMEA,Hollowbrook Retail Holdings,1166,0.36,0.0703,10
+SITE-00449,Redwood Health Amsterdam,Amsterdam,EMEA,Redwood Health LLC,1220,0.35,0.0812,22
+SITE-00484,Northgate Analytics Seattle,Seattle,AMER-West,Northgate Analytics Inc,1220,0.35,0.2073,13
+SITE-00625,Eastfield Foods San Jose,San Jose,AMER-West,Eastfield Foods LLC,1220,0.35,0.004,106
+SITE-00398,Cedarbrook Pharma Raleigh,Raleigh,AMER-East,Cedarbrook Pharma LLC,720,0.31,0.1332,1
+SITE-00195,Eastfield Health Austin,Austin,AMER-East,Eastfield Health Ltd,1220,0.3,0.0222,39
+SITE-00585,Ironvale Mutual Phoenix,Phoenix,AMER-West,Ironvale Mutual plc,1220,0.3,0.0037,2
+SITE-00210,Hollowbrook Analytics Madrid,Madrid,EMEA,Hollowbrook Analytics Ltd,1200,0.29,0.1119,5
+SITE-00041,Westgate Pharma Atlanta,Atlanta,AMER-East,Westgate Pharma GmbH,1200,0.28,0.1261,5
+SITE-00078,Sandstone Pharma Raleigh,Raleigh,AMER-East,Sandstone Pharma LLC,1200,0.28,0.1429,5
+SITE-00642,Hollowbrook Foods Amsterdam,Amsterdam,EMEA,Hollowbrook Foods Inc,1200,0.27,0.1181,4
+SITE-00653,Hollowbrook Logistics Amsterdam,Amsterdam,EMEA,Hollowbrook Logistics Inc,1200,0.27,0.036,1
+SITE-00401,Northwind Analytics Phoenix,Phoenix,AMER-West,Northwind Analytics Holdings,1200,0.26,0.0117,11
+SITE-00227,Granite Media Austin,Austin,AMER-East,Granite Media plc,1200,0.25,0.1664,2
+SITE-00073,Pinecrest Health Madrid,Madrid,EMEA,Pinecrest Health Holdings,1220,0.25,0.0554,23
+SITE-00218,Whitehall Retail San Jose,San Jose,AMER-West,Whitehall Retail Holdings,1220,0.24,0.0051,3
+SITE-00067,Lighthouse Health San Jose,San Jose,AMER-West,Lighthouse Health plc,1199,0.22,0.0926,7
+SITE-00193,Thornhill Retail Seattle,Seattle,AMER-West,Thornhill Retail Ltd,540,0.21,0.0144,4
+SITE-00009,Stonefield Aerospace Austin,Austin,AMER-East,Stonefield Aerospace Inc,1200,0.21,0.0291,9
+SITE-00123,Maplewood Systems Phoenix,Phoenix,AMER-West,Maplewood Systems Corp,1200,0.21,0.0475,6
+SITE-00161,Westgate Analytics Amsterdam,Amsterdam,EMEA,Westgate Analytics Ltd,1200,0.2,0.0752,4
+SITE-00393,Thornhill Foods Seattle,Seattle,AMER-West,Thornhill Foods LLC,1220,0.19,0.037,38
+SITE-00032,Meridian Logistics Dublin,Dublin,EMEA,Meridian Logistics Holdings,1200,0.18,0.0059,9
+SITE-00670,Copperfield Aerospace Santiago,Santiago,LATAM,Copperfield Aerospace GmbH,1200,0.16,0.0147,5
+SITE-00053,Kingsbridge Media Austin,Austin,AMER-East,Kingsbridge Media Ltd,720,0.16,0.0241,1
+SITE-00309,Foxglove Analytics Mexico City,Mexico City,LATAM,Foxglove Analytics GmbH,1199,0.15,0.0215,5
+SITE-00101,Stonefield Pharma Madrid,Madrid,EMEA,Stonefield Pharma GmbH,540,0.15,0.0287,20
+SITE-00052,Goldcrest Analytics Boston,Boston,AMER-East,Goldcrest Analytics Corp,540,0.14,0.0189,8
+SITE-00487,Foxglove Mutual Denver,Denver,AMER-West,Foxglove Mutual Holdings,1200,0.13,0.0226,7
+SITE-00339,Northwind Health Phoenix,Phoenix,AMER-West,Northwind Health Holdings,720,0.12,0.0065,1
+SITE-00226,Dunmore Foods Phoenix,Phoenix,AMER-West,Dunmore Foods Holdings,720,0.12,0.0016,1
+SITE-00136,Foxglove Media Tokyo,Tokyo,APJ,Foxglove Media Corp,540,0.12,0.0037,13
+SITE-00278,Westgate Mutual Phoenix,Phoenix,AMER-West,Westgate Mutual plc,1200,0.11,0.0175,5
+SITE-00104,Eastfield Pharma Boston,Boston,AMER-East,Eastfield Pharma Inc,1200,0.08,0.0022,5
+SITE-00081,Valleyforge Logistics Denver,Denver,AMER-West,Valleyforge Logistics Corp,1200,0.08,0.0059,9
+SITE-00056,Kingsbridge Media Denver,Denver,AMER-West,Kingsbridge Media Ltd,1200,0.07,0.0003,1
+SITE-00542,Whitehall Analytics Raleigh,Raleigh,AMER-East,Whitehall Analytics Ltd,1220,0.05,0.0004,41

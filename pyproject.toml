@@ -14,10 +14,15 @@ dependencies = [
   "psycopg[binary]==3.3.6",
   "sqlalchemy==2.1.5",
   "pyyaml==6.0.3",
+  "lightgbm==4.6.0",
+  "scikit-learn==1.8.0",
+  "matplotlib==3.10.8",
+  "streamlit==1.56.0",
 ]
 
 [dependency-groups]
 dev = [
+  "playwright==1.58.0",
   "pytest==9.1.1",
 ]
 
