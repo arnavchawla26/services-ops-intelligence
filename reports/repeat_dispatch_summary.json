@@ -1,0 +1,22 @@
+{
+  "dispatches": 4108,
+  "repeats": 1138,
+  "repeat_rate": 0.277,
+  "same_case_repeats": 1001,
+  "cross_case_repeats": 137,
+  "cross_case_window_days": 30,
+  "cases_with_dispatch": 3107,
+  "unparsed_case_timestamps": 0,
+  "repeats_necessary": 472,
+  "repeats_avoidable": 666,
+  "same_case_definition_matches_truth": true,
+  "first_visits_unnecessary_share": 0.3997,
+  "repeat_reasons": {
+    "repeat_without_new_fault": 660,
+    "follow_up_after_incomplete": 187,
+    "follow_up_after_parts_not_available": 154,
+    "hardware_fault": 131,
+    "deflectable_case": 5,
+    "no_hardware_fault": 1
+  }
+}

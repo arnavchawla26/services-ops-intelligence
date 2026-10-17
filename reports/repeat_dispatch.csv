@@ -1,0 +1,103 @@
+dimension,key,dispatches,repeats,same_case_repeats,cross_case_repeats,repeat_rate,repeats_necessary,repeats_avoidable,avoidable_repeat_rate,first_visits_unnecessary
+all,all,4108,1138,1001,137,0.277,472,666,0.1621,1242
+case_category,drive_failure,2375,688,556,132,0.2897,414,274,0.1154,230
+case_category,performance,486,115,115,0,0.2366,17,98,0.2016,290
+case_category,connectivity,409,113,113,0,0.2763,16,97,0.2372,248
+case_category,config,197,60,59,1,0.3046,0,60,0.3046,138
+case_category,predictive_alert,194,45,42,3,0.232,25,20,0.1031,5
+case_category,false_alarm,179,48,48,0,0.2682,0,48,0.2682,131
+case_category,firmware,153,35,35,0,0.2288,0,35,0.2288,118
+case_category,how_to,115,34,33,1,0.2957,0,34,0.2957,82
+first_visit_part_supplier,no part used,2113,786,759,27,0.372,211,575,0.2721,982
+first_visit_part_supplier,Delta Interconnect,867,157,114,43,0.1811,118,39,0.045,45
+first_visit_part_supplier,Pacific Storage Components,681,138,83,55,0.2026,106,32,0.047,58
+first_visit_part_supplier,Rhine Electronics,228,39,28,11,0.1711,26,13,0.057,50
+first_visit_part_supplier,Andes Logistics Parts,123,15,14,1,0.122,11,4,0.0325,18
+first_visit_part_supplier,Sierra Memory Modules,74,3,3,0,0.0405,0,3,0.0405,71
+first_visit_part_supplier,Atlantic Power Supplies,16,0,0,0,0.0,0,0,0.0,12
+first_visit_part_supplier,Kanto Precision,6,0,0,0,0.0,0,0,0.0,6
+product_family,Storage Array,1685,487,430,57,0.289,208,279,0.1656,548
+product_family,HCI Node,1037,274,240,34,0.2642,109,165,0.1591,294
+product_family,Rack Server,747,202,170,32,0.2704,94,108,0.1446,181
+product_family,Backup Appliance,507,141,132,9,0.2781,45,96,0.1893,188
+product_family,Edge Gateway,132,34,29,5,0.2576,16,18,0.1364,31
+region,AMER-East,1288,354,313,41,0.2748,150,204,0.1584,378
+region,EMEA,1153,301,265,36,0.2611,119,182,0.1578,352
+region,AMER-West,1149,327,293,34,0.2846,128,199,0.1732,387
+region,APJ,421,131,107,24,0.3112,67,64,0.152,94
+region,LATAM,97,25,23,2,0.2577,8,17,0.1753,31
+technician,Kenji Chen,118,36,29,7,0.3051,18,18,0.1525,33
+technician,Noah Chen,100,30,28,2,0.3,14,16,0.16,30
+technician,Jordan Nguyen,94,26,21,5,0.2766,14,12,0.1277,25
+technician,Samir Haddad,94,24,20,4,0.2553,8,16,0.1702,33
+technician,Tomas Patel,93,29,28,1,0.3118,9,20,0.2151,23
+technician,Elena Nguyen,87,18,13,5,0.2069,8,10,0.1149,26
+technician,Kenji Andersson,87,21,18,3,0.2414,7,14,0.1609,29
+technician,Samir Patel,85,22,19,3,0.2588,12,10,0.1176,27
+technician,Aisha Kim,83,29,28,1,0.3494,11,18,0.2169,28
+technician,Priya Haddad,83,23,20,3,0.2771,11,12,0.1446,25
+technician,Tomas Chen,82,18,15,3,0.2195,5,13,0.1585,29
+technician,Aisha Rossi,81,17,15,2,0.2099,8,9,0.1111,22
+technician,Kenji Rossi,81,27,23,4,0.3333,16,11,0.1358,22
+technician,Omar Nguyen,79,27,23,4,0.3418,14,13,0.1646,17
+technician,Aisha Silva,78,18,17,1,0.2308,6,12,0.1538,28
+technician,Maria Mensah,77,18,16,2,0.2338,6,12,0.1558,24
+technician,Kenji Novak,74,24,21,3,0.3243,10,14,0.1892,18
+technician,Nadia Schmidt,74,18,16,2,0.2432,11,7,0.0946,25
+technician,Priya Garcia,74,20,18,2,0.2703,9,11,0.1486,18
+technician,Grace Nguyen,71,17,17,0,0.2394,6,11,0.1549,23
+technician,Maria Brennan,71,13,12,1,0.1831,6,7,0.0986,19
+technician,Tomas Andersson,71,22,20,2,0.3099,5,17,0.2394,26
+technician,Elena Dubois,70,19,17,2,0.2714,3,16,0.2286,16
+technician,Grace Novak,69,15,13,2,0.2174,5,10,0.1449,23
+technician,Grace Dubois,67,20,19,1,0.2985,6,14,0.209,15
+technician,Sofia Andersson,66,19,19,0,0.2879,7,12,0.1818,18
+technician,Aisha Garcia,63,21,16,5,0.3333,11,10,0.1587,15
+technician,Aisha Haddad,62,22,21,1,0.3548,8,14,0.2258,24
+technician,Fatima Dubois,62,15,14,1,0.2419,6,9,0.1452,20
+technician,Samir Ivanova,62,12,11,1,0.1935,3,9,0.1452,21
+technician,Kenji Reyes,60,14,12,2,0.2333,4,10,0.1667,22
+technician,Mateo Rossi,59,18,18,0,0.3051,8,10,0.1695,17
+technician,Samir Brennan,58,11,8,3,0.1897,6,5,0.0862,15
+technician,Maria Schmidt,57,14,14,0,0.2456,4,10,0.1754,23
+technician,Hana Brennan,53,15,12,3,0.283,4,11,0.2075,20
+technician,Noah Ivanova,51,11,7,4,0.2157,8,3,0.0588,18
+technician,Elena Reyes,50,17,15,2,0.34,8,9,0.18,16
+technician,Ravi Kim,50,14,13,1,0.28,6,8,0.16,17
+technician,Samir Mensah,50,11,10,1,0.22,5,6,0.12,19
+technician,Nadia Nguyen,49,18,17,1,0.3673,4,14,0.2857,13
+technician,Wei Nguyen,49,9,7,2,0.1837,3,6,0.1224,15
+technician,Wei Rossi,49,15,15,0,0.3061,5,10,0.2041,14
+technician,Nadia Kaur,47,12,10,2,0.2553,7,5,0.1064,18
+technician,Priya Okafor,47,16,14,2,0.3404,6,10,0.2128,17
+technician,Jordan Chen,46,16,12,4,0.3478,11,5,0.1087,7
+technician,Luis Mensah,45,15,14,1,0.3333,3,12,0.2667,14
+technician,Nadia Chen,45,16,15,1,0.3556,3,13,0.2889,6
+technician,Sofia Schmidt,45,9,6,3,0.2,4,5,0.1111,19
+technician,Fatima Kaur,43,9,9,0,0.2093,4,5,0.1163,15
+technician,Fatima Reyes,43,13,11,2,0.3023,5,8,0.186,14
+technician,Grace Chen,43,9,8,1,0.2093,5,4,0.093,16
+technician,Mateo Chen,43,14,9,5,0.3256,8,6,0.1395,10
+technician,Ravi Olsen,43,11,10,1,0.2558,5,6,0.1395,13
+technician,Omar Silva,42,21,19,2,0.5,9,12,0.2857,9
+technician,Aisha Reyes,41,14,12,2,0.3415,5,9,0.2195,7
+technician,Priya Silva,41,7,7,0,0.1707,2,5,0.122,11
+technician,Samir Mori,41,12,12,0,0.2927,3,9,0.2195,16
+technician,Hana Mensah,40,10,9,1,0.25,4,6,0.15,19
+technician,Alex Chen,39,16,13,3,0.4103,6,10,0.2564,9
+technician,Jordan Rossi,39,9,8,1,0.2308,4,5,0.1282,12
+technician,Luis Garcia,39,15,13,2,0.3846,10,5,0.1282,12
+technician,Noah Olsen,37,10,10,0,0.2703,6,4,0.1081,9
+technician,Omar Kim,37,14,13,1,0.3784,3,11,0.2973,8
+technician,Omar Patel,37,8,7,1,0.2162,3,5,0.1351,18
+technician,Elena Kim,35,10,7,3,0.2857,7,3,0.0857,10
+technician,Hana Okafor,35,15,13,2,0.4286,6,9,0.2571,7
+technician,Hana Rossi,27,6,4,2,0.2222,5,1,0.037,7
+technician,Elena Brennan,21,5,4,1,0.2381,3,2,0.0952,6
+technician,Elena Silva,19,6,5,1,0.3158,2,4,0.2105,5
+technician,Grace Olsen,15,4,4,0,0.2667,1,3,0.2,4
+technician,Ravi Silva,12,3,3,0,0.25,1,2,0.1667,3
+technician,Grace Haddad,9,2,1,1,0.2222,1,1,0.1111,3
+technician,Luis Haddad,7,1,1,0,0.1429,0,1,0.1429,2
+technician,Tomas Reyes,7,2,2,0,0.2857,1,1,0.1429,2
+technician,Fatima Andersson,5,1,1,0,0.2,1,0,0.0,3

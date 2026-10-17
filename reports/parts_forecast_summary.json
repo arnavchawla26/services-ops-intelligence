@@ -1,0 +1,31 @@
+{
+  "weeks": 13,
+  "series": 140,
+  "origins": 6,
+  "horizon_weeks": 1,
+  "region_part_mae": {
+    "naive": 0.8405,
+    "ma4": 0.794,
+    "ses": 0.7283,
+    "lgbm": 0.676
+  },
+  "region_part_bias": {
+    "naive": 0.0714,
+    "ma4": 0.1988,
+    "ses": 0.0476,
+    "lgbm": -0.1657
+  },
+  "fleet_total_mae": {
+    "naive": 2.369,
+    "ma4": 2.3155,
+    "ses": 1.9951,
+    "lgbm": 2.1524
+  },
+  "fleet_total_bias": {
+    "naive": 0.3571,
+    "ma4": 0.994,
+    "ses": 0.238,
+    "lgbm": -0.8283
+  },
+  "mean_weekly_demand_per_series": 1.2071
+}
