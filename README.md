@@ -51,7 +51,7 @@ Why generated data is acceptable here: a hiring manager cares that the problem
 shape matches theirs, and known ground truth is what makes honest evaluation
 possible. The telemetry, which is what the failure model learns from, is real.
 
-## Results (v0.1, measured 2026-10-17)
+## Results (v0.2, measured 2026-10-17)
 
 Everything below was printed by code in this repository (`make analyses`) and
 is in `reports/` with the numbers it printed. The memo for an operations
@@ -100,7 +100,8 @@ them would catch 67% of failures at 0.7% precision. At any budget an
 operation could run, the model catches several times what the rule catches,
 and still under 10% of the month's failures with 100 trucks a day: most
 failures show nothing in the counters first. Top features by gain: 7-day max
-of pending sectors (46%), reallocated sectors, drive model, power-on hours.
+of SMART 197, sectors waiting to be remapped (46%), reallocated sectors,
+drive model, power-on hours.
 
 ### Parts demand forecast (generated dispatches)
 
@@ -122,6 +123,44 @@ same-case definition matches the truth flag on every row. The rates reproduce
 the generator's rules (docs/GENERATOR.md); they are not a finding about any
 real operation.
 
+### Case deflection candidates (generated cases and runbooks)
+
+`sois.case_deflection`. Each case description is matched against the 22
+runbooks (title, symptoms, steps) with TF-IDF cosine (unigrams and bigrams,
+scikit-learn) and, independently, Okapi BM25 (own implementation); only
+runbooks of the case's product family are eligible. A case is a candidate
+when its best match clears a threshold. The threshold maximises F1 on one
+half of the 8,281 cases (seeded split) and the numbers below are from the
+other half (4,200 cases, 1,158 deflectable per `truth/case_truth.csv`);
+swapping the halves moves them by about a point.
+
+| Variant | Flagged | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| TF-IDF, family-restricted | 1,604 | 50% | 70% | 0.58 |
+| BM25, family-restricted | 1,936 | 41% | 68% | 0.51 |
+| TF-IDF + severity >= 3 (policy rule) | 1,122 | 69% | 67% | 0.68 |
+| TF-IDF, every runbook eligible | 3,347 | 33% | 97% | 0.50 |
+
+![case deflection](reports/case_deflection.png)
+
+What this proves. The cases and runbooks are generated. The generator sets
+`deflectable` first, from category, severity and coin flips (how_to, config,
+firmware at severity 3 or 4 with a matched runbook: 85%; false_alarm: 60%;
+everything else: 3%), and only then copies one of the runbook's symptom
+phrases into the description; non-deflectable cases carry a stock phrase that
+is also the first symptom of a runbook in their category. The text therefore
+tells a matcher whether a runbook covers the symptom, which is the generator's
+precondition, and nothing about the severity gate or the coins, so no text
+matcher can score well on drive-failure, performance or connectivity cases
+(a runbook exists, the fault is real). On how_to, config and firmware the
+matcher is at 70% to 74% precision and 69% to 83% recall, and with every
+runbook eligible its top runbook is the generator's for 98% of deflectable
+cases (BM25 86%): the matching works. The family restriction costs recall
+(97% to 70%) because the generator links a case to another family's runbook
+when its own family has none for that category. Full tables:
+`reports/case_deflection_metrics.json`, `reports/case_deflection_pr_table.csv`,
+per-case scores in `reports/case_deflection.csv`.
+
 ### Dashboard, memo, Colab
 
 `make dashboard` runs the Streamlit app over `reports/` only (no data needed).
@@ -133,7 +172,7 @@ real operation.
   [open in Colab](https://colab.research.google.com/github/arnavchawla26/services-ops-intelligence/blob/main/notebooks/feature_pipeline_cudf.ipynb),
   steps in [docs/COLAB.md](docs/COLAB.md). Measured on a Colab T4 (30 days, 10.4M rows): the feature step ran 5.1x faster on cudf.pandas (0.79 s vs 4.06 s); end to end 1.03x because CSV reading dominates. Table and caveats in docs/COLAB.md.
 
-## Analyses: done and pending
+## Analyses
 
 - Done: 30-day failure model with a leak-free time split, calibrated
   probabilities, dispatch-budget table and chart.
@@ -142,11 +181,29 @@ real operation.
   baselines.
 - Done: repeat-dispatch analysis by product, category, region, technician
   and supplier, checked against the truth flags.
-- Pending: case deflection candidates (runbook text match scored against
-  `truth/case_truth.csv`).
-- Done: Streamlit dashboard; two-page memo (one memo covering all three
-  analyses, not one per analysis).
+- Done: case deflection candidates, TF-IDF and BM25 runbook match scored
+  against `truth/case_truth.csv` with the threshold chosen on a held-out half.
+- Done: Streamlit dashboard (five pages); two-page memo (one memo covering
+  all four analyses, not one per analysis).
 - Done: the Colab cuDF notebook, run on a T4 on 2026-10-17 (5.1x on the feature step, 1.03x end to end; see docs/COLAB.md).
+
+## Scope
+
+Every Project 1 item from the design notes, done with its file or cut with
+the reason.
+
+| Item | Status | Where / why |
+|---|---|---|
+| 30-day failure model, calibrated, as a dispatch-budget decision | Done | `src/sois/failure_model.py`, `reports/dispatch_budget*.{csv,png}`, `reports/failure_model_metrics.json` |
+| Parts demand forecast by region and part with backtests and a naive baseline | Done (weekly, not monthly) | `src/sois/parts_forecast.py`, `reports/parts_forecast*`; 13 weeks of data allow a weekly rolling-origin backtest only |
+| Repeat-dispatch analysis by case type, product, region | Done | `src/sois/repeat_dispatch.py`, `reports/repeat_dispatch*` |
+| Case deflection candidates from case text vs runbooks | Done | `src/sois/case_deflection.py`, `reports/case_deflection*` |
+| Leader-facing dashboard (Power BI or Streamlit) | Done, Streamlit | `app/dashboard.py`, `reports/dashboard.png`; Streamlit is code a reviewer can read and run from a clone |
+| Power BI screenshot | Cut | Power BI is not used here; a screenshot of a second tool over the same `reports/` files would show nothing the Streamlit page does not, and the Streamlit code is what a reviewer can run |
+| Two-page memo per analysis | Done as one memo | `docs/memo.md` covers all four analyses in two pages; four memos would repeat the data and caveat sections |
+| Colab notebook with cudf.pandas timings | Done | `notebooks/feature_pipeline_cudf.ipynb`, `docs/COLAB.md`, T4 timings in the notebook outputs |
+| Survival analysis (lifelines, time to failure by model and vendor) | Cut | 91 days of telemetry is too short for survival curves on drives that run for years, and the 30-day classifier is the decision the ops lead asked for; with a year of data this is the first thing to add |
+| Anomaly detection on fleet telemetry | Cut | Listed in the earlier Project A sketch the notes folded into this project. The telemetry has failure labels, so an unsupervised detector would be scored against the same labels as the classifier with less information; it earns its place on telemetry without labels (fans, PSUs), which this quarter does not have |
 
 ## What exists today
 
@@ -159,18 +216,20 @@ real operation.
 - `docker-compose.yml`, `sql/schema.sql`, `src/sois/load_postgres.py`:
   Postgres 16 with the generated tables, the drive summary, and the last 30
   days of daily telemetry (the full quarter stays in Parquet).
-- `src/sois/failure_model.py`, `parts_forecast.py`, `repeat_dispatch.py`: the
-  three analyses, each a CLI writing to `reports/` (`make models`, `make
-  parts`, `make repeat`). The failure model reads the Parquet with DuckDB one
-  prediction date at a time and runs in about 30 seconds on a laptop.
+- `src/sois/failure_model.py`, `parts_forecast.py`, `repeat_dispatch.py`,
+  `case_deflection.py`: the four analyses, each a CLI writing to `reports/`
+  (`make models`, `make parts`, `make repeat`, `make deflection`). The failure
+  model reads the Parquet with DuckDB one prediction date at a time and runs
+  in about 30 seconds on a laptop.
 - `app/dashboard.py`, `scripts/screenshot_dashboard.py`: the dashboard and its
   headless screenshot.
-- `tests/`: 39 tests on hand-made synthetic fixtures, covering loader counts
+- `tests/`: 45 tests on hand-made synthetic fixtures, covering loader counts
   and schema drift, generator determinism and every mess rule, the DDL, a live
-  Postgres load when a database is listening, and for the analyses: features
+  Postgres load when `SOIS_TEST_DSN` is set, and for the analyses: features
   use only days <= t, labels match the window, the split refuses a leaking
   configuration, budget arithmetic, mixed-format timestamp parsing, the repeat
-  definitions, and end-to-end runs on a 60-day synthetic fleet.
+  definitions, BM25 ranking, the family restriction, threshold choice, and
+  end-to-end runs on synthetic fleets and cases.
 
 ## Setup
 
@@ -186,7 +245,7 @@ make load                                # CSV -> data/parquet (DuckDB)
 make generate                            # enterprise tables -> data/enterprise, truth/
 cp .env.example .env && make db-up       # Postgres 16 in Docker
 make postgres                            # schema + load
-make analyses                            # failure model, parts backtest, repeat dispatch -> reports/
+make analyses                            # failure model, parts backtest, repeat dispatch, case deflection -> reports/
 make dashboard                           # Streamlit over reports/ (works from a fresh clone)
 ```
 
@@ -224,7 +283,8 @@ Source: https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data
 ```
 scripts/      download_backblaze.sh, render_schema.py, screenshot_dashboard.py
 src/sois/     load_telemetry.py, generate_enterprise.py, load_postgres.py,
-              failure_model.py, parts_forecast.py, repeat_dispatch.py
+              failure_model.py, parts_forecast.py, repeat_dispatch.py,
+              case_deflection.py
 app/          dashboard.py (Streamlit, reads reports/ only)
 notebooks/    feature_pipeline_cudf.ipynb (Colab, pandas vs cudf.pandas)
 reports/      small CSV/JSON/PNG outputs of the analyses (committed)
