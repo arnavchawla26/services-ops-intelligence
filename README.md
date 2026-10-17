@@ -110,10 +110,12 @@ into Postgres (`--telemetry-days` to change).
 
 Backblaze publishes daily SMART snapshots for every drive in its data centers.
 Per Backblaze's own page, 2026 Q2 is 2.1 GB zipped, 11.7 GB on disk, 354,415
-drives, 1,498 failures and 31.5 million drive-days. Those are their numbers;
-`make load` prints what it actually finds in `data/parquet/load_summary.json`,
-and this README will be updated with the counted figures once the load has
-run. Columns: `date, serial_number, model, capacity_bytes, failure,
+drives, 1,498 failures and 31.5 million drive-days. Counted by `make load` on
+2026-10-17 (`data/parquet/load_summary.json`): 31,968,003 drive-days across
+91 days (2026-04-01 to 2026-06-30), 359,101 distinct serial numbers, 1,522
+failure rows, 81 drive models. The drive count is higher than Backblaze's
+because it counts every serial seen at any point in the quarter, including
+drives replaced mid-quarter. Columns: `date, serial_number, model, capacity_bytes, failure,
 datacenter, cluster_id, vault_id, pod_id, pod_slot_num, is_legacy_format`,
 then `smart_N_normalized` / `smart_N_raw` pairs. The loader keeps attributes
 1, 3, 4, 5, 7, 9, 10, 12, 187, 188, 190, 192, 193, 194, 196, 197, 198, 199,

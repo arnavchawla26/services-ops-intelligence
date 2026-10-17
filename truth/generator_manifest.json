@@ -1,0 +1,104 @@
+{
+  "seed": 20261017,
+  "input_drive_summary_sha256": "997de8733171dd46c0a444ea90ae3693be580bcbb56fcc31cd796299870c5bbe",
+  "tables": {
+    "account": {
+      "rows": 335,
+      "sha256_csv": "651c8926740f69c7ad11f40aae9d07ba47b924363d3fb62b9eb7a84fadf96300"
+    },
+    "site": {
+      "rows": 701,
+      "sha256_csv": "53c8f9986458da4f45429612844fc8d3cdea07817cb4d7b00661c0cf3e0082bc"
+    },
+    "contact": {
+      "rows": 471,
+      "sha256_csv": "4c046956e329b5c24165b2938d7db30fd865597413fdf867fe49f4c3981d8b3c"
+    },
+    "product": {
+      "rows": 10,
+      "sha256_csv": "e53bbff8bdd842198d1b094fe8a129c362b6be324be874b9324083b454cac39f"
+    },
+    "installed_asset": {
+      "rows": 359101,
+      "sha256_csv": "15201883d2b079a4e41d7d37969389be59fcc457c7bb8a773bd2a9c6d67af9c5"
+    },
+    "order": {
+      "rows": 8204,
+      "sha256_csv": "0b302c495965b810b1e8ad6f120043a77c27e46bce879d751fa9e92bd4ef4aff"
+    },
+    "order_line": {
+      "rows": 43624,
+      "sha256_csv": "12a2aa52844b721114fa6464a63f2c9d0a7903b251889dad913680f8199871d8"
+    },
+    "part": {
+      "rows": 30,
+      "sha256_csv": "1cc6a623e8c2d452618ff1bf3fb8b6a235d93379b3a992ee718ebbfcaaafa170"
+    },
+    "supplier": {
+      "rows": 8,
+      "sha256_csv": "0047d7a85c6fbe3300c407542b01a7c3de2c312acfa6cdcbb75d78f728acc00c"
+    },
+    "part_supplier": {
+      "rows": 61,
+      "sha256_csv": "9a2e4d3b6023a68c5e8510fd2cbf56d8f6c6394dfcfa48ce4312bec0a82c9633"
+    },
+    "inventory": {
+      "rows": 180,
+      "sha256_csv": "55bfc6b982558564062a795d5d4a6235c7174d1eb9b761142a83b4116d34cbc6"
+    },
+    "technician": {
+      "rows": 80,
+      "sha256_csv": "0577608835c4f50c62d9a107cea7389c90e91497a791f38bd369b7e8b52189c9"
+    },
+    "runbook": {
+      "rows": 22,
+      "sha256_csv": "aed1999cb43f9f0ddce24c4697f3b41ef6fe1729466815d695e2f730478a641c"
+    },
+    "case": {
+      "rows": 8281,
+      "sha256_csv": "765a0e4b743537c5358e0a9ec6ce8ce323c4c8166f2e63411bd9352a1915c071"
+    },
+    "dispatch": {
+      "rows": 4108,
+      "sha256_csv": "65c97d376f7d6ccd8671110b31a8df24d6fbce9ec2caeec8a6b7c4b55b4ad80d"
+    },
+    "dispatch_part": {
+      "rows": 2616,
+      "sha256_csv": "0f88ee97d3dee7d44e2f621beb47a49b1cbc974b411eee87489a4738173024d8"
+    },
+    "data_product": {
+      "rows": 3,
+      "sha256_csv": "be4ce2dc90b1017900bd4a35b47b885bfb8c68ab412878d69cac9488f630cbab"
+    },
+    "job": {
+      "rows": 4,
+      "sha256_csv": "e10ad4bf26d78cd4a91a7137eae32cfa2824b154c6b012986fa039d1fcdd3e82"
+    },
+    "lineage": {
+      "rows": 10,
+      "sha256_csv": "47b411363826c7daf368853910a54db553c5855a3b5ebedc4e346239046fcdc9"
+    },
+    "query_log": {
+      "rows": 300,
+      "sha256_csv": "9f48b9d6be570fc14067f5f9cdc81130730e5dc3c44978839efa19601f8c8f1f"
+    }
+  },
+  "truth": {
+    "account_resolution": {
+      "rows": 335,
+      "sha256_csv": "5a59e32590966838002c0c156da9548416538889e3b99737bbcf685e3f62cecd"
+    },
+    "asset_serial_map": {
+      "rows": 359101,
+      "sha256_csv": "25367bbbc1a9dc364d4cc9117c531a867e5d17a4918655db35c0a94c6ccdbfd8"
+    },
+    "case_truth": {
+      "rows": 8281,
+      "sha256_csv": "0c73dbf339d7f5bcc245386f2618cf5545399fbb1724c8c09a07e076e4ae7255"
+    },
+    "dispatch_truth": {
+      "rows": 4108,
+      "sha256_csv": "360cb3d8ee5e8a227f1a9c9e8ba50c23f4de8f4935801e2b943593813ca70bb6"
+    }
+  }
+}
