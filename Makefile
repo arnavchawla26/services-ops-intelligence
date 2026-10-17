@@ -1,7 +1,7 @@
 # Entry points. Everything runs through uv so the pinned environment is used.
 # Order for a fresh machine: download -> load -> generate -> db-up -> postgres -> test -> analyses -> dashboard
 # LightGBM on macOS needs Homebrew libomp: brew install libomp
-.PHONY: sync test download load generate postgres db-up db-down clean-derived models parts repeat analyses dashboard screenshot
+.PHONY: sync test download load generate postgres db-up db-down clean-derived models parts repeat deflection analyses dashboard screenshot
 
 UV ?= uv
 
@@ -41,7 +41,10 @@ parts:           ## weekly parts demand backtest (needs data/enterprise)
 repeat:          ## repeat-dispatch analysis (needs data/enterprise and truth/)
 	$(UV) run python -m sois.repeat_dispatch --enterprise data/enterprise --truth truth --reports reports
 
-analyses: models parts repeat
+deflection:      ## case-deflection candidates: runbook text match scored against truth (needs data/enterprise and truth/)
+	$(UV) run python -m sois.case_deflection --enterprise data/enterprise --truth truth --reports reports
+
+analyses: models parts repeat deflection
 
 dashboard:       ## Streamlit over reports/ only (no data needed)
 	$(UV) run streamlit run app/dashboard.py
