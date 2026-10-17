@@ -20,13 +20,24 @@ prints a timings table and the environment.
 
 ## Measured timings
 
-Pending. The development machine for this repository has no NVIDIA GPU, so the
-notebook has not been run end to end yet; the pandas half of the script was
-run locally on 8 days (2,766,327 rows, 346,361 drives on the last day) in 4.2
-seconds on an Apple M-series laptop, which is only a check that the script is
-correct, not a comparable number. When the Colab run is done, replace this
-paragraph with the printed table (pandas seconds, cudf.pandas seconds,
-speedup, per step) and the GPU name.
+Run by Arnav on Google Colab on 2026-10-17, N_DAYS = 30, Tesla T4, pandas
+2.2.3, cudf 26.06.00. Pasted from the notebook's last cell:
+
+| step                                  |   pandas_s |   cudf_pandas_s |   speedup |
+|:--------------------------------------|-----------:|----------------:|----------:|
+| read N CSVs (needed columns)          |      48.5  |           51.33 |      0.94 |
+| features: lag, 7-day max, delta, join |       4.06 |            0.79 |      5.14 |
+| script total (incl. import)           |      53.03 |           52.22 |      1.02 |
+| process wall clock                    |      57.22 |           55.52 |      1.03 |
+
+days: 30, rows read: 10,430,946, drives on last day: 350,542, heuristic-flagged:
+29,360 (identical counts in both runs).
+
+Reading: the feature step (groupby, joins, lags) ran 5.1x faster on cudf.pandas;
+the CSV read did not, so end to end the run is a wash (1.03x). The honest claim
+is "5x on the feature step, 1x end to end on this script because CSV parsing
+dominates"; a Parquet input or a larger N_DAYS would shift the balance toward
+the GPU, and that was not measured.
 
 ## What the timings mean and do not mean
 

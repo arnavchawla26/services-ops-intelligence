@@ -131,8 +131,7 @@ real operation.
 - Memo for an operations leader: [docs/memo.md](docs/memo.md).
 - Colab notebook with the feature pipeline in pandas and `cudf.pandas`:
   [open in Colab](https://colab.research.google.com/github/arnavchawla26/services-ops-intelligence/blob/main/notebooks/feature_pipeline_cudf.ipynb),
-  steps in [docs/COLAB.md](docs/COLAB.md). Timings pending: this machine has
-  no NVIDIA GPU, so the notebook has not been run end to end.
+  steps in [docs/COLAB.md](docs/COLAB.md). Measured on a Colab T4 (30 days, 10.4M rows): the feature step ran 5.1x faster on cudf.pandas (0.79 s vs 4.06 s); end to end 1.03x because CSV reading dominates. Table and caveats in docs/COLAB.md.
 
 ## Analyses: done and pending
 
@@ -147,7 +146,7 @@ real operation.
   `truth/case_truth.csv`).
 - Done: Streamlit dashboard; two-page memo (one memo covering all three
   analyses, not one per analysis).
-- Done (code), pending (timings): the Colab cuDF notebook.
+- Done: the Colab cuDF notebook, run on a T4 on 2026-10-17 (5.1x on the feature step, 1.03x end to end; see docs/COLAB.md).
 
 ## What exists today
 
