@@ -13,6 +13,7 @@ import socket
 from pathlib import Path
 
 import duckdb
+import os
 import pytest
 
 from sois.generate_enterprise import generate, load_inputs, write_outputs
@@ -80,17 +81,21 @@ def _postgres_reachable() -> bool:
         return False
 
 
-@pytest.mark.skipif(not _postgres_reachable(), reason="no Postgres listening; run `docker compose up -d`")
+@pytest.mark.skipif(
+    not os.environ.get("SOIS_TEST_DSN"),
+    reason="set SOIS_TEST_DSN to a throwaway database; this test wipes and reloads whatever it points at, "
+    "so it must never run against the shared warehouse (it once replaced the real load with this fixture)",
+)
 def test_load_into_real_postgres(pipeline):
     pq, ent = pipeline
-    counts = load(dsn_from_env(ROOT), pq, ent, SCHEMA, telemetry_days=2)
+    counts = load(os.environ["SOIS_TEST_DSN"], pq, ent, SCHEMA, telemetry_days=2)
     assert counts["installed_asset"] == 6
     assert counts["telemetry_drive_summary"] == 6
     assert counts["drive_model"] == 5
     assert counts["telemetry_daily_recent"] == 6 + 5   # last 2 of 3 fixture days
     assert counts["case"] > 0 and counts["query_log"] == 300
     import psycopg
-    with psycopg.connect(dsn_from_env(ROOT)) as pg:
+    with psycopg.connect(os.environ["SOIS_TEST_DSN"]) as pg:
         n_null = pg.execute("SELECT count(*) FROM installed_asset WHERE warranty_end IS NULL").fetchone()[0]
         fk = pg.execute("SELECT count(*) FROM \"case\" c LEFT JOIN installed_asset a USING (asset_id) WHERE a.asset_id IS NULL").fetchone()[0]
     assert fk == 0 and n_null >= 0
