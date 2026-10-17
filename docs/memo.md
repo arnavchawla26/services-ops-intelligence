@@ -3,13 +3,13 @@
 To: Services Operations leadership
 From: Arnav Chawla
 Date: 2026-10-17
-Repository: services-ops-intelligence, tag v0.1
+Repository: services-ops-intelligence, tag v0.2
 
 ## The question
 
 Every day a field organisation decides where to send a limited number of
 technicians. Some of those visits replace a part that was about to fail; some
-roll for nothing. This memo answers three questions on one quarter of data:
+roll for nothing. This memo answers four questions on one quarter of data:
 
 1. If we can afford B truck rolls a day, how many of the drives that will fail
    in the next 30 days can a model put on that list, and how does that compare
@@ -18,6 +18,7 @@ roll for nothing. This memo answers three questions on one quarter of data:
    "same as last week"?
 3. How often does a truck go back to the same asset, and how much of that is
    avoidable?
+4. Which cases could have been closed from a runbook without a person?
 
 ## The data
 
@@ -27,37 +28,25 @@ The 2026 second quarter holds 31,968,003 drive-days, 359,101 drives, 81 drive
 models and 1,522 failures over 91 days (2026-04-01 to 2026-06-30).
 
 Everything around the telemetry is generated: the 335 customer accounts, 701
-sites, 8,281 support cases, 4,108 dispatches and 30 parts were produced by a
-seeded program in this repository that places every real drive at a customer
-site and opens cases around the real failure dates. The generated data is
-deliberately messy in documented ways (one customer spelled three ways, dates
-in two formats, two definitions of "failure"), and the program keeps the
-ground truth, which is what makes the dispatch analysis checkable. Section
-"What is real and what is generated" below says which numbers rest on which.
+sites, 8,281 support cases, 4,108 dispatches, 22 runbooks and 30 parts come
+from a seeded program in this repository that places every real drive at a
+customer site and opens cases around the real failure dates. The data is
+deliberately messy in documented ways, and the program keeps the ground
+truth, which is what makes the dispatch and deflection answers checkable.
 
 ## What the model does
 
 For each drive and each day t, the model gives the probability that the
 drive fails within the next 30 days, using only what was known on day t: the
-five SMART counters Backblaze found predictive (reallocated sectors, reported
-uncorrectable errors, command timeouts, pending sectors, offline
-uncorrectable), power-on hours, temperature, interface errors, bytes read and
-written, the drive model and capacity, and how those counters moved over the
-previous seven days.
-
-Three rankings were compared:
-
-- Backblaze's rule: flag any drive with any of the five counters above zero.
-- A logistic regression.
-- A gradient-boosted tree model (LightGBM), with probabilities calibrated on
-  drives the model never trained on.
-
-The test is strict about time. The models were trained on prediction dates
-2026-04-08 to 2026-04-24, whose 30-day labels run to 2026-05-24. They were
-then scored on 2026-05-25 to 2026-05-31, whose labels run to 2026-06-30. No
-failure that counts in the test was ever a training label, and nothing was
-tuned on the test window. The test holds 2,469,958 drive-days and 2,123
-positive drive-days from 404 distinct drives that failed.
+five SMART counters Backblaze found predictive, power-on hours, temperature,
+interface errors, bytes moved, drive model and capacity, and how the counters
+moved over the previous seven days. Three rankings were compared: Backblaze's
+rule (any of the five counters above zero), a logistic regression, and a
+gradient-boosted tree model (LightGBM) calibrated on drives it never trained
+on. The test is strict about time: training prediction dates 2026-04-08 to
+04-24 (labels to 05-24), test dates 05-25 to 05-31 (labels to 06-30), so no
+test failure was ever a training label and nothing was tuned on the test
+window. The test holds 2,469,958 drive-days and 404 distinct failing drives.
 
 ## The dispatch-budget result
 
@@ -75,26 +64,21 @@ operation can roll 30,000 trucks, so the useful comparison is at a budget.
 | 250 | 20.4 | 229.6 | 50.6 | 199.4 | 16.7% |
 
 In sentences: with 50 trucks a day, the model puts about 17 soon-to-fail
-drives on the list and 33 trucks roll for nothing (one in three visits finds
-a drive that fails within the month). The rule of thumb at the same budget
-finds 2 or 3. With 100 trucks, the model finds 28 against the rule's 8. The
-logistic regression sits between the two (9 at 50 trucks, 19 at 100).
+drives on the list and 33 trucks roll for nothing (one visit in three finds
+a drive that fails within the month); the rule of thumb finds 2 or 3. With
+100 trucks, the model finds 28 against the rule's 8. The logistic regression
+sits between the two.
 
 The honest reading of the same table: even the best ranking catches under 10%
-of the coming month's failures with 100 trucks a day, because 303 drives a day
-are failing and most of them show no warning in their counters. The model is
-good at ordering the queue, not at making failures predictable. Ranking
-quality on the test window: precision-recall area 0.099 for LightGBM, 0.057
-for the logistic regression, 0.018 for the rule (the floor, random ordering,
-is 0.0009). Of all failures, 50% are in the model's top 1% of drives and 21%
-in its top 0.1%.
-
-The calibrated probabilities are usable but rough: the model's top decile
-predicts 0.81% and observes 0.61%; the bottom deciles under-predict slightly.
-Calibration rests on 415 failure events, and the whole test on 404 failing
-drives, so the numbers above move by a few points between reasonable choices
-of window. They should be read as "the model is several times better than the
-rule at any budget", not as "16.9".
+of the coming month's failures with 100 trucks a day, because most of the 303
+show no warning in their counters. The model orders the queue well; it does
+not make failures predictable. Precision-recall area: 0.099 for LightGBM,
+0.057 for the logistic regression, 0.018 for the rule (random ordering
+0.0009); half of all failures sit in the model's top 1% of drives. The
+calibrated probabilities are usable but rough (top decile predicts 0.81%,
+observes 0.61%), and with 404 failing drives in the test these numbers move by
+a few points between reasonable windows. Read them as "several times better
+than the rule at any budget", not as "16.9".
 
 ## Parts demand
 
@@ -104,44 +88,75 @@ possible). Average absolute error per region-and-part series, where the
 average week uses 1.2 units: last-week naive 0.84, four-week average 0.79,
 exponential smoothing 0.73, pooled LightGBM 0.68. Summed to fleet totals per
 part, exponential smoothing was best (2.00 against 2.37 for naive) and the
-LightGBM under-forecast as demand fell through June. On this data a simple
-smoother beats "same as last week" by about 15%; the learned model buys a
-little more at the series level and nothing at the total. This demand was
-generated from the real failure dates plus random background cases, so the
-pipeline and the comparison are proven, the demand itself is not.
+LightGBM under-forecast as demand fell through June. A simple smoother beats
+"same as last week" by about 15%; the learned model adds little. The demand
+is generated: the pipeline and the comparison are proven, the demand is not.
 
 ## Repeat dispatches
 
 A repeat is a second or third visit on the same case, or a first visit within
 30 days of a previous dispatched case closing on the same asset. Of 4,108
 dispatches, 1,138 (27.7%) are repeats: 1,001 on the same case and 137 across
-cases. Against the ground truth, 472 of the repeats were necessary
-(follow-ups after a part was missing or a visit ran out of time on a real
-fault) and 666 were avoidable. Drive-failure cases have a high repeat rate
-(29%) but a low avoidable rate (11.5%); configuration, how-to and firmware
-cases have repeat rates of 23% to 30% with every repeat avoidable, because
-those cases had no hardware fault to begin with. Forty percent of first visits
-were unnecessary by the same truth. These rates reproduce the rules the
-generator was given; they describe the method, not a real operation.
+cases. Against the ground truth, 472 were necessary (follow-ups after a
+missing part or an unfinished visit on a real fault) and 666 avoidable.
+Drive-failure cases repeat often (29%) but rarely avoidably (11.5%);
+configuration, how-to and firmware cases repeat 23% to 30% of the time with
+every repeat avoidable, because there was no hardware fault. Forty percent of
+first visits were unnecessary by the same truth. These rates reproduce the
+generator's rules; they describe the method, not a real operation.
+
+## Which cases could a runbook have closed?
+
+A case is a deflection candidate when its description reads closely enough
+like one of the 22 runbooks. Two text matchers were run, TF-IDF and BM25 (the
+scoring behind classical search); each case was scored against the runbooks
+for its product family and flagged when its best match cleared a threshold.
+The threshold was chosen on one half of the 8,281 cases and the result
+measured on the other half, against the generator's record of which cases
+were in fact deflectable (2,252, or 27%).
+
+On the held-out half TF-IDF flags 1,604 cases, 806 of them deflectable:
+precision 50%, recall 70%. BM25: 41% and 68%. One policy rule, that only
+severity 3 and 4 cases can be deflected, lifts TF-IDF to 69% precision at 67%
+recall. On how-to, configuration and firmware cases 70% to 74% of flags are
+right and 69% to 83% of deflectable cases are found; with every runbook
+eligible, the matcher's top runbook is the one the generator used for 98% of
+deflectable cases. Where it fails is the useful part: drive-failure,
+performance and connectivity cases match a runbook just as closely, because a
+runbook exists for the symptom, and almost none are deflectable, because the
+fault is real.
+
+The caveat matters more here than anywhere else in this memo. The generator
+decided deflectability first (from category, severity and a coin) and only
+then copied a runbook phrase into the case text; a non-deflectable case in the
+same category carries a stock phrase that is also a runbook's first symptom.
+So the text can tell a matcher that a runbook covers the symptom, which is
+necessary for deflection, and nothing about the severity gate or the coin.
+The 50% and 70% measure how close a matcher gets to that ceiling on templated
+text, not what it would do on real case text. The number to trust is the
+runbook hit rate: the matching itself works. The family filter costs recall
+(97% to 70%) because the generator assigns a case to another family's runbook
+when its own family has none, a property of a 22-entry library, not of the
+method.
 
 ## What is real and what is generated
 
 Real: the telemetry, the failure labels, the failure model, every number in
 the dispatch-budget table, the ranking metrics, and the drive-level risk list.
-Generated: which customer owns which drive, the cases, the dispatches, the
-parts used, and therefore every number in the parts and repeat-dispatch
-sections. The generated numbers test that the code answers the question
-correctly (the ground truth is known); they do not describe any customer.
+Generated: which customer owns which drive, the cases and their text, the
+runbooks, the dispatches, the parts used, and therefore every number in the
+parts, repeat-dispatch and deflection sections. The generated numbers test
+that the code answers the question correctly (the ground truth is known); they
+do not describe any customer.
 
 ## What would change with a year of data
 
-- The test would cover several months instead of seven days and several
-  thousand failures instead of 404, so the budget table would have error bars
-  worth printing and calibration would be trustworthy per drive model.
-- Seasonal and monthly backtests of parts demand become possible, and the
-  forecast could be tied to the failure model (expected failures by site next
-  month, hence sleds to stage at each depot).
-- Repeat-dispatch rates by technician and supplier would stop being noise:
-  most technicians have fewer than 60 visits in this quarter.
-- Real case and dispatch records would replace the generator, and the
-  "avoidable" split would need a human-reviewed sample instead of ground truth.
+- Months of test days and thousands of failures instead of 404: error bars on
+  the budget table, calibration per drive model.
+- Monthly and seasonal parts backtests, and a forecast tied to the failure
+  model (expected failures by site next month, hence sleds to stage).
+- Repeat rates by technician and supplier would stop being noise (most
+  technicians have fewer than 60 visits this quarter).
+- Real case and dispatch records in place of the generator: "avoidable" and
+  "deflectable" would need a human-reviewed sample, and the deflection
+  matcher would be judged on real case text.
