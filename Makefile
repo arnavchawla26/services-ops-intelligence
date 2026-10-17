@@ -1,6 +1,7 @@
 # Entry points. Everything runs through uv so the pinned environment is used.
-# Order for a fresh machine: download -> load -> generate -> db-up -> postgres -> test
-.PHONY: sync test download load generate postgres db-up db-down clean-derived
+# Order for a fresh machine: download -> load -> generate -> db-up -> postgres -> test -> analyses -> dashboard
+# LightGBM on macOS needs Homebrew libomp: brew install libomp
+.PHONY: sync test download load generate postgres db-up db-down clean-derived models parts repeat analyses dashboard screenshot
 
 UV ?= uv
 
@@ -30,3 +31,20 @@ postgres:        ## create schema and load enterprise tables + telemetry summary
 
 clean-derived:   ## remove derived data only; never touches data/raw
 	rm -rf data/parquet data/enterprise
+
+models:          ## 30-day failure model, dispatch-budget table and chart, fleet risk files (needs data/parquet)
+	$(UV) run python -m sois.failure_model --parquet data/parquet --enterprise data/enterprise --truth truth --reports reports --models models
+
+parts:           ## weekly parts demand backtest (needs data/enterprise)
+	$(UV) run python -m sois.parts_forecast --enterprise data/enterprise --reports reports
+
+repeat:          ## repeat-dispatch analysis (needs data/enterprise and truth/)
+	$(UV) run python -m sois.repeat_dispatch --enterprise data/enterprise --truth truth --reports reports
+
+analyses: models parts repeat
+
+dashboard:       ## Streamlit over reports/ only (no data needed)
+	$(UV) run streamlit run app/dashboard.py
+
+screenshot:      ## headless screenshot of the dashboard into reports/dashboard.png
+	$(UV) run python scripts/screenshot_dashboard.py
