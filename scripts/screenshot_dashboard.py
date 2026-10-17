@@ -14,7 +14,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["Fleet risk", "Dispatch budget", "Parts", "Repeat dispatch"]
+PAGES = ["Fleet risk", "Dispatch budget", "Parts", "Repeat dispatch", "Case deflection"]
 
 
 def free_port() -> int:
@@ -73,10 +73,11 @@ def main() -> int:
             proc.kill()
     imgs = [Image.open(p) for p in shots]
     w, h = imgs[0].size
-    grid = Image.new("RGB", (w * 2, h * 2), "white")
+    rows = (len(imgs) + 1) // 2
+    grid = Image.new("RGB", (w * 2, h * rows), "white")
     for i, im in enumerate(imgs):
         grid.paste(im, ((i % 2) * w, (i // 2) * h))
-    grid = grid.resize((w, h), Image.LANCZOS)
+    grid = grid.resize((w, h * rows // 2), Image.LANCZOS)
     grid.save(out_dir / "dashboard.png", optimize=True)
     for p in shots:
         p.unlink()
