@@ -20,9 +20,9 @@ The three repositories:
 
 1. `services-ops-intelligence` (this one): the shared data foundation and the
    Services Operations analyses.
-2. `enterprise-knowledge-graph` (planned): ontology, entity resolution,
+2. [`enterprise-knowledge-graph`](https://github.com/arnavchawla26/enterprise-knowledge-graph) (v0.1): ontology, entity resolution,
    lineage graph and text-to-Cypher over the same enterprise.
-3. `knowledge-agents-pilot` (planned): governed agents on NVIDIA Auto
+3. [`knowledge-agents-pilot`](https://github.com/arnavchawla26/knowledge-agents-pilot) (v0.1): governed agents on NVIDIA Auto
    Ontology, Elasticsearch and MCP, with evaluations and program artifacts.
 
 ## What is real and what is generated
