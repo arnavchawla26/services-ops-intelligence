@@ -5,16 +5,14 @@ base of hardware, built the way a Services Operations team would use it.
 
 ## Why this exists
 
-On October 6, 2026 Dell announced the next release of the Dell AI Data
-Platform, and Arthur Lewis (President, Infrastructure Solutions Group) put the
-problem in one line: "In many cases, the model is not the next constraint, the
-data is." The platform's answer is a data layer that engines and agents share,
-an enterprise knowledge graph built from metadata, lineage and query history,
-and knowledge agents that get trusted, permissioned context instead of raw
-tables. This repository is the data-science end of a three-part portfolio
-built on that framing: one small enterprise whose systems disagree the way
-real ones do, real hardware telemetry underneath it, and models whose output
-is an operations decision rather than an accuracy score.
+Enterprise AI data platforms converged on one diagnosis in 2026: the model is
+rarely the next constraint, the data is. Their answer is a data layer that
+engines and agents share, an enterprise knowledge graph built from metadata,
+lineage and query history, and knowledge agents that get trusted, permissioned
+context instead of raw tables. This repository is the data-science end of a
+three-part portfolio built on that idea: one small enterprise whose systems
+disagree the way real ones do, real hardware telemetry underneath it, and
+models whose output is an operations decision rather than an accuracy score.
 
 The three repositories:
 

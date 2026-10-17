@@ -48,6 +48,5 @@ the GPU, and that was not measured.
   the speedup is for this script, on this data, on a T4, nothing more.
 - In the repository the same features are built by DuckDB over Parquet
   (`make models`, about 30 seconds for the whole quarter's training and test
-  windows on the laptop). The Colab notebook is the RAPIDS comparison the
-  Dell "NVIDIA Data Processing Engine" framing asks for, not the production
-  path.
+  windows on the laptop). The Colab notebook is the RAPIDS comparison for a
+  GPU data-processing engine, not the production path.

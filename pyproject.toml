@@ -1,7 +1,7 @@
 [project]
 name = "sois"
 version = "0.1.0"
-description = "Services Ops Intelligence: predictive support and parts forecasting on real drive telemetry plus a generated enterprise (Dell project 1 of 3)"
+description = "Services Ops Intelligence: predictive support and parts forecasting on real drive telemetry plus a generated enterprise"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "Arnav Chawla" }]
