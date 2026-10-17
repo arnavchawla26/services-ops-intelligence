@@ -1,0 +1,28 @@
+# Postgres 16 for the agent-facing tables. Data lives in a named volume.
+# Config comes from .env (copy .env.example); defaults below match .env.example.
+#   docker compose up -d        # start
+#   make postgres               # load schema + tables (see sql/schema.sql)
+#   docker compose down -v      # stop and delete the volume
+services:
+  postgres:
+    image: postgres:16
+    container_name: sois-postgres
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sois}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sois_local_dev_only}
+      POSTGRES_DB: ${POSTGRES_DB:-sois}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - sois_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sois} -d ${POSTGRES_DB:-sois}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  sois_pgdata:
