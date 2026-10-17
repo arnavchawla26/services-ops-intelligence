@@ -51,24 +51,103 @@ Why generated data is acceptable here: a hiring manager cares that the problem
 shape matches theirs, and known ground truth is what makes honest evaluation
 possible. The telemetry, which is what the failure model learns from, is real.
 
-## Planned analyses
+## Results (v0.1, measured 2026-10-17)
 
-None of these exist yet. Each will land in its own commit with its own numbers.
+Everything below was printed by code in this repository (`make analyses`) and
+is in `reports/` with the numbers it printed. The memo for an operations
+reader is [docs/memo.md](docs/memo.md).
 
-- 30-day failure model on the telemetry (time-based split, features only from
-  days before the prediction date, calibrated probabilities), reported as a
-  dispatch-budget decision: at a given number of truck rolls, how many failures
-  are caught and how many trucks roll for nothing.
-- Parts demand forecast by region and part, backtested month by month against
-  a naive "same as last month" baseline.
-- Repeat-dispatch analysis: which products, case categories and regions drive
-  second visits, checked against `truth/dispatch_truth.csv`.
-- Case deflection candidates: cases whose text matches a runbook closely
-  enough that a human was not needed, scored against `truth/case_truth.csv`.
-- A Streamlit dashboard for operations leads.
-- A two-page findings memo per analysis.
-- One Google Colab notebook running the feature pipeline with NVIDIA cuDF
-  (`cudf.pandas`) and reporting measured timings against pandas.
+### 30-day failure risk as a dispatch-budget decision (real telemetry)
+
+`sois.failure_model`. Label: the drive has `failure = 1` on any day in
+(t, t + 30]. Features use only days <= t. Time split with no label leakage:
+train prediction dates 2026-04-08 to 2026-04-24 (labels through 05-24), test
+prediction dates 2026-05-25 to 2026-05-31 (labels through 06-30), so no test
+label was ever a training label; nothing was tuned on the test window. Fit
+rows have negatives downsampled to 10%; 20% of drives are held out of the fit
+and calibrate the probabilities (Platt) on the last five training dates. Test:
+2,469,958 drive-days, 2,123 positive drive-days, 404 distinct failing drives.
+
+| Ranking | PR-AUC | Recall in top 0.1% | Recall in top 1% | Brier (calibrated) |
+|---|---:|---:|---:|---:|
+| Backblaze rule (any of SMART 5/187/188/197/198 > 0) | 0.018 | 7% | 30% | n/a |
+| Logistic regression | 0.057 | 15% | 44% | 0.000913 |
+| LightGBM | 0.099 | 21% | 50% | 0.000816 |
+
+Base rate 0.00086 (a random ranking scores PR-AUC 0.0009); a constant
+predictor scores Brier 0.000859, so the calibrated LightGBM beats it only
+slightly and the reliability table (`reports/reliability.csv`) shows the top
+decile predicting 0.81% against an observed 0.61%. Calibration rests on 415
+events and the test on 404 failing drives: expect these numbers to move by a
+few points with a different window.
+
+Dispatch budget on the test window (per day, mean over 7 days; about 303
+drives a day are within 30 days of failing; full table in
+`reports/dispatch_budget.csv`):
+
+| Trucks per day | Rule caught | Rule for nothing | Logistic caught | LightGBM caught | LightGBM for nothing | LightGBM recall |
+|---:|---:|---:|---:|---:|---:|---:|
+| 10 | 0.1 | 9.9 | 2.9 | 5.6 | 4.4 | 1.8% |
+| 25 | 1.1 | 23.9 | 6.1 | 10.6 | 14.4 | 3.5% |
+| 50 | 2.4 | 47.6 | 8.9 | 16.9 | 33.1 | 5.6% |
+| 100 | 7.9 | 92.1 | 19.3 | 27.9 | 72.1 | 9.2% |
+| 250 | 20.4 | 229.6 | 35.1 | 50.6 | 199.4 | 16.7% |
+
+![dispatch budget](reports/dispatch_budget.png)
+
+The rule flags 29,930 drives a day (8.5% of the fleet); dispatching to all of
+them would catch 67% of failures at 0.7% precision. At any budget an
+operation could run, the model catches several times what the rule catches,
+and still under 10% of the month's failures with 100 trucks a day: most
+failures show nothing in the counters first. Top features by gain: 7-day max
+of pending sectors (46%), reallocated sectors, drive model, power-on hours.
+
+### Parts demand forecast (generated dispatches)
+
+`sois.parts_forecast`. Weekly units per region and part from `dispatch_part`;
+13 weeks exist, so the backtest is weekly (rolling origin over the last 6
+weeks, horizon 1), not monthly as first planned. MAE per region x part series
+(mean week 1.2 units): naive 0.84, 4-week average 0.79, exponential smoothing
+0.73, pooled LightGBM 0.68 (bias -0.17). Summed to fleet totals per part:
+naive 2.37, SES 2.00, LightGBM 2.15. The demand is generated, so this proves
+the pipeline and the comparison, not the demand.
+
+### Repeat dispatches (generated support tables)
+
+`sois.repeat_dispatch`. Repeat = visit 2 or 3 on the same case, or a first
+visit within 30 days of a previous dispatched case closing on the same asset.
+4,108 dispatches, 1,138 repeats (27.7%: 1,001 same-case, 137 cross-case).
+Against `truth/dispatch_truth.csv`: 472 necessary, 666 avoidable; the
+same-case definition matches the truth flag on every row. The rates reproduce
+the generator's rules (docs/GENERATOR.md); they are not a finding about any
+real operation.
+
+### Dashboard, memo, Colab
+
+`make dashboard` runs the Streamlit app over `reports/` only (no data needed).
+
+![dashboard](reports/dashboard.png)
+
+- Memo for an operations leader: [docs/memo.md](docs/memo.md).
+- Colab notebook with the feature pipeline in pandas and `cudf.pandas`:
+  [open in Colab](https://colab.research.google.com/github/arnavchawla26/services-ops-intelligence/blob/main/notebooks/feature_pipeline_cudf.ipynb),
+  steps in [docs/COLAB.md](docs/COLAB.md). Timings pending: this machine has
+  no NVIDIA GPU, so the notebook has not been run end to end.
+
+## Analyses: done and pending
+
+- Done: 30-day failure model with a leak-free time split, calibrated
+  probabilities, dispatch-budget table and chart.
+- Done: parts demand forecast by region and part, backtested weekly (not
+  monthly: 13 weeks of data) against naive, moving-average and smoothing
+  baselines.
+- Done: repeat-dispatch analysis by product, category, region, technician
+  and supplier, checked against the truth flags.
+- Pending: case deflection candidates (runbook text match scored against
+  `truth/case_truth.csv`).
+- Done: Streamlit dashboard; two-page memo (one memo covering all three
+  analyses, not one per analysis).
+- Done (code), pending (timings): the Colab cuDF notebook.
 
 ## What exists today
 
@@ -81,16 +160,24 @@ None of these exist yet. Each will land in its own commit with its own numbers.
 - `docker-compose.yml`, `sql/schema.sql`, `src/sois/load_postgres.py`:
   Postgres 16 with the generated tables, the drive summary, and the last 30
   days of daily telemetry (the full quarter stays in Parquet).
-- `tests/`: 27 tests on a hand-made synthetic fixture in the Backblaze column
-  layout (`tests/fixtures/`), covering loader counts and schema drift,
-  generator determinism (same seed, same bytes), referential integrity, every
-  mess rule, the causal timing of cases around failures, the DDL in DuckDB,
-  and a live Postgres load when a database is listening.
+- `src/sois/failure_model.py`, `parts_forecast.py`, `repeat_dispatch.py`: the
+  three analyses, each a CLI writing to `reports/` (`make models`, `make
+  parts`, `make repeat`). The failure model reads the Parquet with DuckDB one
+  prediction date at a time and runs in about 30 seconds on a laptop.
+- `app/dashboard.py`, `scripts/screenshot_dashboard.py`: the dashboard and its
+  headless screenshot.
+- `tests/`: 39 tests on hand-made synthetic fixtures, covering loader counts
+  and schema drift, generator determinism and every mess rule, the DDL, a live
+  Postgres load when a database is listening, and for the analyses: features
+  use only days <= t, labels match the window, the split refuses a leaking
+  configuration, budget arithmetic, mixed-format timestamp parsing, the repeat
+  definitions, and end-to-end runs on a 60-day synthetic fleet.
 
 ## Setup
 
 Requirements: Python 3.13, [uv](https://docs.astral.sh/uv/), Docker (for
-Postgres), about 15 GB of disk for the raw data.
+Postgres), about 15 GB of disk for the raw data. The analyses need the
+Parquet and the generated tables; the dashboard and the tests do not.
 
 ```
 uv sync                                  # environment from uv.lock (pinned)
@@ -100,7 +187,13 @@ make load                                # CSV -> data/parquet (DuckDB)
 make generate                            # enterprise tables -> data/enterprise, truth/
 cp .env.example .env && make db-up       # Postgres 16 in Docker
 make postgres                            # schema + load
+make analyses                            # failure model, parts backtest, repeat dispatch -> reports/
+make dashboard                           # Streamlit over reports/ (works from a fresh clone)
 ```
+
+LightGBM on macOS needs OpenMP: `brew install libomp`. The dashboard screenshot
+(`make screenshot`) uses Playwright with the machine's Chrome, or
+`uv run playwright install chromium` once.
 
 `make load` on the full quarter reads about 11.7 GB of CSV; expect minutes,
 not seconds. `make postgres` copies roughly 30 days x all drives of daily rows
@@ -130,12 +223,17 @@ Source: https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data
 ## Layout
 
 ```
-scripts/      download_backblaze.sh, render_schema.py
-src/sois/     load_telemetry.py, generate_enterprise.py, load_postgres.py
+scripts/      download_backblaze.sh, render_schema.py, screenshot_dashboard.py
+src/sois/     load_telemetry.py, generate_enterprise.py, load_postgres.py,
+              failure_model.py, parts_forecast.py, repeat_dispatch.py
+app/          dashboard.py (Streamlit, reads reports/ only)
+notebooks/    feature_pipeline_cudf.ipynb (Colab, pandas vs cudf.pandas)
+reports/      small CSV/JSON/PNG outputs of the analyses (committed)
+models/       trained models and full drive-day scores (gitignored)
 sql/          schema.sql (rendered; Postgres 16 and DuckDB compatible)
-docs/         MESS_RULES.md, GENERATOR.md
+docs/         MESS_RULES.md, GENERATOR.md, memo.md, COLAB.md
 truth/        ground truth (regenerated by `make generate`; manifest committed)
-tests/        pytest suite and the synthetic fixture
+tests/        pytest suite and the synthetic fixtures
 data/         raw/ (downloads, untrusted), parquet/, enterprise/  (all gitignored)
 ```
 
