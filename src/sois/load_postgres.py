@@ -73,7 +73,7 @@ def copy_csv_file(cur: psycopg.Cursor, table: str, csv_path: Path) -> int:
 def copy_duckdb_query(cur: psycopg.Cursor, con: duckdb.DuckDBPyConnection, table: str, sql: str,
                       batch_rows: int = 200_000) -> int:
     """Stream a DuckDB query into a Postgres table through CSV COPY, in batches."""
-    reader = con.execute(sql).fetch_record_batch(batch_rows)
+    reader = con.execute(sql).to_arrow_reader(batch_rows)
     import pyarrow.csv as pacsv
 
     with cur.copy(f"COPY {_q(table)} FROM STDIN WITH (FORMAT csv, HEADER false)") as cp:
