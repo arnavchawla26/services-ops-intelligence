@@ -275,6 +275,10 @@ that you cite Backblaze as the source. They allow selling derivative work
 (this code and its results) and do not allow selling the data itself.
 Source: https://www.backblaze.com/cloud-storage/resources/hard-drive-test-data
 
+## Results page
+
+`site/` is a static page of the results in this README, built by `scripts/build_site.py` from `reports/` and `docs/`. The script writes `site/data/*.json` and `site/img/*`; `site/index.html`, `app.js` and `style.css` are hand-written and read those files. `vercel.json` serves the folder as-is, so nothing is computed at request time. Rebuild the page after regenerating reports.
+
 ## Layout
 
 ```

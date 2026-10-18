@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>services-ops-intelligence: results</title>
+<meta name="description" content="Measured results of services-ops-intelligence: a 30-day drive-failure model as a dispatch-budget decision, a parts demand backtest, repeat-dispatch analysis and case deflection, built from the repository's reports/ files.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha384-bs/nf9FbdNouRbMiFcrcZfLXYPKiPaGVGplVbv7dLGECccEXDW+S3zjqSKR5ZEaD" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <h1>services-ops-intelligence</h1>
+  <p class="lede" id="intro">Predictive support and parts forecasting for an installed base of hardware, built the way a Services Operations team would use it.</p>
+  <div class="links">
+    <a href="https://github.com/arnavchawla26/services-ops-intelligence">Repository on GitHub</a>
+    <a href="https://github.com/arnavchawla26/services-ops-intelligence/blob/main/README.md">README</a>
+    <a href="https://github.com/arnavchawla26/services-ops-intelligence/tree/main/reports">reports/ (the source of every number here)</a>
+    <a href="https://github.com/arnavchawla26/services-ops-intelligence/blob/main/docs/memo.md">docs/memo.md</a>
+  </div>
+  <div class="realgen">
+    <div><b>Real</b><span>the drive telemetry (Backblaze Hard Drive Data, 2026 Q2: 31.97 million drive-days, 359,101 drives, 1,522 failures), the failure labels, the failure model and every dispatch-budget number.</span></div>
+    <div><b>Generated</b><span>the enterprise around it (accounts, sites, cases, dispatches, parts, runbooks) from a seeded generator with ground truth, so the parts, repeat-dispatch and deflection numbers test the method, not any real operation.</span></div>
+  </div>
+  <div class="notice"><b>What is live here.</b> This page is static: <code>scripts/build_site.py</code> reads <code>reports/</code> and <code>docs/memo.md</code> and writes the JSON the charts draw from. The Streamlit dashboard and Postgres do not run on Vercel. Run the dashboard locally with <code>make dashboard</code> from a clone (it reads <code>reports/</code> only, no data download needed).</div>
+  <nav class="toc">
+    <a href="#failure">Failure model</a>
+    <a href="#budget">Dispatch budget</a>
+    <a href="#reliability">Reliability</a>
+    <a href="#parts">Parts forecast</a>
+    <a href="#repeat">Repeat dispatches</a>
+    <a href="#deflection">Case deflection</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#memo">Memo</a>
+  </nav>
+</header>
+
+<section id="failure">
+  <h2>30-day failure risk on real telemetry</h2>
+  <p class="sub" id="failure-sub"></p>
+  <div id="failure-tiles"></div>
+  <div class="card">
+    <h3>Ranking quality on the test window</h3>
+    <p class="sub">Three rankings of the same drive-days. The Backblaze rule flags a drive when any of SMART 5, 187, 188, 197 or 198 is above zero.</p>
+    <div id="ranking-table"></div>
+    <p class="note" id="ranking-note"></p>
+  </div>
+  <div class="card">
+    <h3>LightGBM feature importance (share of gain)</h3>
+    <div class="chart short"><canvas id="c-features"></canvas></div>
+    <p class="src">reports/failure_model_metrics.json, lightgbm_feature_importance_gain</p>
+  </div>
+</section>
+
+<section id="budget">
+  <h2>Dispatch budget: how many failing drives does each ranking catch per day</h2>
+  <p class="sub">Each day the top B drives by score get a truck. "Caught" is a truck that reached a drive failing within 30 days, "for nothing" a truck that did not. Mean over the 7 test days.</p>
+  <div class="card">
+    <div class="slider">
+      <input type="range" id="budget-slider" min="1" max="1000" value="50" step="1" aria-label="Trucks per day">
+      <output id="budget-out" for="budget-slider">50 trucks/day</output>
+    </div>
+    <div id="budget-readout"></div>
+    <div class="chart tall"><canvas id="c-curve"></canvas></div>
+    <p class="src">reports/dispatch_budget_curve.csv (budgets 1 to 1000; every budget to 100, then every 10th). Hover a point for all three rankings; move the slider to read the exact row.</p>
+  </div>
+  <div class="card">
+    <h3>The budget table from the README</h3>
+    <div id="budget-table"></div>
+    <p class="src">reports/dispatch_budget.csv</p>
+  </div>
+</section>
+
+<section id="reliability">
+  <h2>Calibration of the LightGBM probabilities</h2>
+  <p class="sub">Test drive-days in ten equal bins by predicted probability. A calibrated model predicts what it observes. The top bin holds most of the failures.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Predicted vs observed rate per bin</h3>
+      <div class="chart"><canvas id="c-reliability"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Reliability table</h3>
+      <div id="reliability-table"></div>
+      <p class="src">reports/reliability.csv</p>
+    </div>
+  </div>
+</section>
+
+<section id="parts">
+  <h2>Parts demand forecast (generated dispatches)</h2>
+  <p class="sub" id="parts-sub"></p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Backtest MAE by model</h3>
+      <p class="sub">Lower is better. Two levels: each region x part series, and fleet totals per part.</p>
+      <div class="chart"><canvas id="c-parts"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>MAE and bias</h3>
+      <div id="parts-table"></div>
+      <p class="src">reports/parts_forecast_backtest.csv, reports/parts_forecast_summary.json</p>
+    </div>
+  </div>
+  <p class="note">The demand is generated by the seeded enterprise, so this proves the pipeline and the comparison, not the demand.</p>
+</section>
+
+<section id="repeat">
+  <h2>Repeat dispatches (generated support tables)</h2>
+  <p class="sub" id="repeat-sub"></p>
+  <div class="card">
+    <h3>Repeat rate and avoidable-repeat rate by case category</h3>
+    <div class="chart"><canvas id="c-repeat"></canvas></div>
+    <div id="repeat-table"></div>
+    <p class="src">reports/repeat_dispatch.csv, dimension = case_category</p>
+  </div>
+  <p class="note">A repeat is visit 2 or 3 on the same case, or a first visit within 30 days of a previous dispatched case closing on the same asset. The rates reproduce the generator's rules; they are not a finding about any real operation.</p>
+</section>
+
+<section id="deflection">
+  <h2>Case deflection candidates (generated cases and runbooks)</h2>
+  <p class="sub" id="deflection-sub"></p>
+  <div class="card">
+    <h3>Variants on the held-out half</h3>
+    <p class="sub">Thresholds chosen on the tune half, scored on the report half.</p>
+    <div id="deflection-table"></div>
+    <p class="src">reports/case_deflection_metrics.json</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Precision-recall sweep per scorer</h3>
+      <p class="sub">Each point is one threshold. The chosen threshold is the larger marker.</p>
+      <div class="chart"><canvas id="c-pr"></canvas></div>
+      <p class="src">reports/case_deflection_pr_table.csv</p>
+    </div>
+    <div class="card">
+      <h3>TF-IDF by case category</h3>
+      <div id="deflection-cat-table"></div>
+    </div>
+  </div>
+  <p class="note" id="deflection-caveat"></p>
+</section>
+
+<section id="dashboard">
+  <h2>Dashboard</h2>
+  <p class="sub">The Streamlit app has five pages over <code>reports/</code>. It does not run on Vercel; this is its headless screenshot from <code>make screenshot</code>. Run it with <code>make dashboard</code>.</p>
+  <figure>
+    <img src="img/dashboard.png" alt="Screenshot of the five Streamlit dashboard pages stitched into one image">
+    <figcaption>reports/dashboard.png</figcaption>
+  </figure>
+</section>
+
+<section id="memo">
+  <h2>Memo for an operations leader</h2>
+  <p class="sub">docs/memo.md, rendered at build time.</p>
+  <div class="doc" id="memo-doc"><p class="loading">Loading the memo.</p></div>
+</section>
+
+<footer>
+  <p>Built from <code>reports/</code> at commit <span id="commit"></span> on <span id="generated"></span> by <code>scripts/build_site.py</code>. Charts: Chart.js 4.4.1 from cdnjs. No analytics, no other scripts.</p>
+  <p>Source: Backblaze Hard Drive Data (cited per their terms). Code MIT. <a href="https://arnav-chawla.vercel.app">Arnav Chawla</a>.</p>
+</footer>
+
+</div>
+<script src="common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
